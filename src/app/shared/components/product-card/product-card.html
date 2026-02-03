@@ -2,8 +2,7 @@
       <h3>{{ product().name }}</h3>
       <p>{{ product().description }}</p>
       <div class="footer">
-        <span>Valor: {{ product().price | currency }}</span>
-        <small>{{ product().createdAt | date:'shortDate' }}</small>
+            <small>{{ product().createdAt | date:'shortDate' }}</small>
       </div>
       <button (click)="onClaim()">¡Lo quiero!</button>
     </div>

@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductService } from '@core/services/product.service';
+import { ProductCard } from '@shared/components/product-card/product-card';
 
 @Component({
   selector: 'app-catalog',
-  imports: [],
+  imports: [ProductCard],
   templateUrl: './catalog.html',
   styleUrl: './catalog.scss',
 })
