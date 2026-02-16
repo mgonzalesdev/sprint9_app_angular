@@ -1,0 +1,12 @@
+    @if (product(); as item) {
+      <div class="detail-container">
+        <h1>{{ item.name }}</h1>
+        <p>{{ item.description }}</p>
+        
+        <h3>Ubicación de entrega</h3>
+        <!-- Pasamos coordenadas fijas por ahora o desde el objeto si las tienes -->
+        <app-map [lat]="-34.6037" [lng]="-58.3816" />
+        
+        <button class="btn-primary">Contactar para recoger</button>
+      </div>
+    }

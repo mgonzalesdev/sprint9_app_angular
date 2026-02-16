@@ -8,9 +8,9 @@ import * as L from 'leaflet';
   styleUrl: './map.scss',
 })
 export class Map {
-  lat = input.required<number>();
+ lat = input.required<number>();
   lng = input.required<number>();
-
+  
   mapContainer = viewChild.required<ElementRef>('mapContainer');
   private map!: L.Map;
 
