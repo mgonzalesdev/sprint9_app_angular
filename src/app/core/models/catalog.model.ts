@@ -21,3 +21,21 @@ export interface Product {
     status: Status;
     condition: Condition
 }
+
+//Stats data
+export interface CategoryStat {
+  label: string; // Nombre de la categoría
+  value: string | number; // COUNT() suele venir como string en getRawMany()
+}
+
+// Estructura para el gráfico de Barras (Tendencias)
+export interface TrendStat {
+  month: string; // Formato 'YYYY-MM'
+  total: string | number;
+}
+
+// Estructura para los contadores rápidos
+export interface SummaryStats {
+  totalProducts: number;
+  activeProducts: number;
+}

@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-chart',
-  imports: [],
+  imports: [BaseChartDirective],
   templateUrl: './chart.html',
   styleUrl: './chart.scss',
 })
