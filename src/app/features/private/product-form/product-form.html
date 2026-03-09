@@ -1,34 +1,87 @@
-<form [formGroup]="productForm" (ngSubmit)="save()">
-    <input formControlName="name" placeholder="Nombre del objeto">
-    <textarea formControlName="description" placeholder="Descripción"></textarea>
-    <label>Categoría:</label>
-    <select formControlName="categoryId">
-        <option [value]="null">Seleccione categoría</option>
-        @for (cat of categories(); track cat.id) {
-        <option [value]="cat.id">{{ cat.name }}</option>
-        }
-    </select>
-    <label>Estado:</label>
-    <select formControlName="statusId">
-        <option [value]="null">Seleccione estado</option>
-        @for (status of statuses(); track status.id) {
-        <option [value]="status.id">{{ status.name }}</option>
-        }
-    </select>
-    <label>Condición:</label>
-    <select formControlName="conditionId">
-        <option [value]="null">Seleccione condición del producto</option>
-        @for (condition of conditions(); track condition.id) {
-        <option [value]="condition.id">{{ condition.name }}</option>
-        }
-    </select>
-    <div class="location-section">
-        <label>Ubicación de entrega (Mueve el marcador a una zona cercana)</label>
-        <app-map [lat]="coords().lat" [lng]="coords().lng" [isEditable]="true"
-            (locationChanged)="onMapChange($event)" />
-        <p class="help-text">Por tu seguridad, no marques el punto exacto de tu casa.</p>
+<div
+  class="max-w-3xl mx-auto my-10 p-8 bg-white rounded-3xl shadow-xl border border-slate-100 animate-in fade-in zoom-in-95 duration-500">
+
+  <div class="mb-8">
+    <h2 class="text-3xl font-extrabold text-slate-800">{{ id() ? 'Editar Regalo ✏️' : 'Publicar nuevo Artículo 🎁' }}
+    </h2>
+    <p class="text-slate-500 mt-2">Completa la información para que alguien pueda darle una segunda vida a tu objeto.
+    </p>
+  </div>
+
+  <form [formGroup]="productForm" (ngSubmit)="save()" class="space-y-6">
+
+    <div>
+      <label class="block text-sm font-bold text-slate-700 mb-2">Nombre del objeto</label>
+      <input formControlName="name" type="text" placeholder="Ej. Bicicleta de montaña"
+        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-100 focus:border-indigo-500 outline-none transition-all">
     </div>
-    <button type="submit" [disabled]="productForm.invalid">
-        {{ id() ? 'Actualizar' : 'Publicar' }}
-    </button>
-</form>
+
+    <div>
+      <label class="block text-sm font-bold text-slate-700 mb-2">Descripción detallada</label>
+      <textarea formControlName="description" rows="4"
+        placeholder="Cuéntanos sobre el estado, tamaño o cualquier detalle..."
+        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-100 focus:border-indigo-500 outline-none transition-all resize-none"></textarea>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div>
+        <label class="block text-sm font-bold text-slate-700 mb-2">Categoría</label>
+        <select formControlName="categoryId"
+          class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-100 outline-none transition-all appearance-none">
+          <option [value]="null">Seleccionar...</option>
+          @for (cat of categories(); track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-bold text-slate-700 mb-2">Condición</label>
+        <select formControlName="conditionId"
+          class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-100 outline-none transition-all appearance-none">
+          <option [value]="null">Seleccionar...</option>
+          @for (condition of conditions(); track condition.id) {
+          <option [value]="condition.id">{{ condition.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-bold text-slate-700 mb-2">Disponibilidad</label>
+        <select formControlName="statusId"
+          class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-100 outline-none transition-all appearance-none">
+          <option [value]="null">Seleccionar...</option>
+          @for (status of statuses(); track status.id) {
+          <option [value]="status.id">{{ status.name }}</option>
+          }
+        </select>
+      </div>
+
+
+    </div>
+
+    <div class="pt-4 border-t border-slate-100">
+      <label class="block text-sm font-bold text-slate-700 mb-1">Punto de entrega aproximado 📍</label>
+      <p class="text-xs text-slate-400 mb-4 italic">Por tu seguridad, mueve el marcador a una calle o plaza cercana, no
+        a tu puerta.</p>
+
+      <div class="rounded-2xl overflow-hidden border-2 border-slate-100 shadow-inner">
+        <app-map [lat]="coords().lat" [lng]="coords().lng" [isEditable]="true"
+          (locationChanged)="onMapChange($event)" />
+      </div>
+    </div>
+
+    <div class="flex gap-4 pt-6">
+      <button type="button" routerLink="/manage/list"
+        class="flex-1 px-6 py-4 rounded-2xl font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 transition-all active:scale-95">
+        Cancelar
+      </button>
+      <button type="submit" [disabled]="productForm.invalid"
+        class="flex-2 px-6 py-4 rounded-2xl font-bold text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 disabled:cursor-not-allowed shadow-lg shadow-indigo-200 transition-all active:scale-95">
+        {{ id() ? 'Guardar Cambios' : 'Publicar ahora' }}
+      </button>
+    </div>
+
+  </form>
+</div>

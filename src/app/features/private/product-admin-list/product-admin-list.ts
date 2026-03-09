@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '@core/models/catalog.model';
-import { ProductService } from '@core/services/product.service';
+import { ProductService } from '@core/services/product';
 import { CustomCalendar } from '@shared/components/custom-calendar/custom-calendar';
 
 @Component({

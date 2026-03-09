@@ -1,45 +1,38 @@
 <div class="dashboard-wrapper">
-  
-  <!-- SECCIÓN 1: Resumen (Summary) -->
+
   <div class="summary-grid">
     @if (summary()) {
-      <div class="card highlight">
-        <h3>Total Publicados</h3>
-        <p class="value">{{ summary()!.totalProducts }}</p>
-      </div>
-      <div class="card success">
-        <h3>Disponibles para Regalar</h3>
-        <p class="value">{{ summary()!.activeProducts }}</p>
-      </div>
+    <div class="card highlight">
+      <h3>Total Publicados</h3>
+      <p class="value">{{ summary()!.totalProducts }}</p>
+    </div>
+    <div class="card success">
+      <h3>Disponibles para Regalar</h3>
+      <p class="value">{{ summary()!.activeProducts }}</p>
+    </div>
     } @else {
-      <div class="card loading">Cargando resumen...</div>
+    <div class="card loading">Cargando resumen...</div>
     }
   </div>
 
-  <!-- SECCIÓN 2: Gráficos -->
   <div class="charts-layout">
-    
-    <!-- Gráfico de Categorías (Pie) -->
+
     <div class="chart-container">
       <h4>Impacto por Categoría</h4>
       @if (rawPie().length > 0) {
-        <app-chart 
-          type="pie" 
-          [data]="categoryPieData()" />
+      <app-chart type="pie" [data]="categoryPieData()" />
       } @else {
-        <div class="placeholder">Analizando categorías...</div>
+      <div class="placeholder">Analizando categorías...</div>
       }
     </div>
 
-    <!-- Gráfico de Tendencias (Bar) -->
+
     <div class="chart-container">
       <h4>Crecimiento de Regalos (6 meses)</h4>
       @if (rawBar().length > 0) {
-        <app-chart 
-          type="bar" 
-          [data]="trendsBarData()" />
+      <app-chart type="bar" [data]="trendsBarData()" />
       } @else {
-        <div class="placeholder">Calculando tendencias...</div>
+      <div class="placeholder">Calculando tendencias...</div>
       }
     </div>
 

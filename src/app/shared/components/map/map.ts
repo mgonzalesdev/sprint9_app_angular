@@ -33,13 +33,10 @@ export class Map {
       attribution: '© OpenStreetMap'
     }).addTo(this.map);
 
-    /* L.marker([lat, lng]).addTo(this.map)
-       .bindPopup('Punto de entrega 🎁')
-       .openPopup();*/
     this.marker = L.marker([lat, lng], {
-      draggable: this.isEditable() // 👈 Habilitar arrastre si es editable
+      draggable: this.isEditable()
     }).addTo(this.map);
-    
+
     if (this.isEditable()) {
       this.marker.on('dragend', () => {
         const position = this.marker.getLatLng();

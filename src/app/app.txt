@@ -1,0 +1,85 @@
+Listado de rutas de carpetas
+El n£mero de serie del volumen es 368E-E60F
+C:.
+³   app.config.ts
+³   app.html
+³   app.routes.ts
+³   app.scss
+³   app.spec.ts
+³   app.ts
+³   app.txt
+³   
+ÃÄÄÄcore
+³   ÃÄÄÄauth
+³   ÃÄÄÄcomponents
+³   ³   ÀÄÄÄnavbar
+³   ³           navbar.html
+³   ³           navbar.scss
+³   ³           navbar.ts
+³   ³           
+³   ÃÄÄÄmodels
+³   ³       catalog.model.ts
+³   ³       
+³   ÀÄÄÄservices
+³           catalog.ts
+³           product.service.ts
+³           stats.ts
+³           
+ÃÄÄÄfeatures
+³   ÃÄÄÄauth
+³   ÃÄÄÄprivate
+³   ³   ÃÄÄÄdashboard
+³   ³   ³       dashboard.html
+³   ³   ³       dashboard.scss
+³   ³   ³       dashboard.ts
+³   ³   ³       
+³   ³   ÃÄÄÄproduct-admin-list
+³   ³   ³       product-admin-list.html
+³   ³   ³       product-admin-list.scss
+³   ³   ³       product-admin-list.ts
+³   ³   ³       
+³   ³   ÀÄÄÄproduct-form
+³   ³           product-form.html
+³   ³           product-form.scss
+³   ³           product-form.ts
+³   ³           
+³   ÀÄÄÄpublic
+³       ÃÄÄÄcatalog
+³       ³   ³   catalog.html
+³       ³   ³   catalog.scss
+³       ³   ³   catalog.ts
+³       ³   ³   
+³       ³   ÀÄÄÄcomponents
+³       ³       ÀÄÄÄcatalog-map
+³       ³               catalog-map.html
+³       ³               catalog-map.scss
+³       ³               catalog-map.ts
+³       ³               
+³       ÀÄÄÄproduct-detail
+³               product-detail.html
+³               product-detail.scss
+³               product-detail.ts
+³               
+ÀÄÄÄshared
+    ÀÄÄÄcomponents
+        ÃÄÄÄchart
+        ³       chart.html
+        ³       chart.scss
+        ³       chart.ts
+        ³       
+        ÃÄÄÄcustom-calendar
+        ³       custom-calendar.html
+        ³       custom-calendar.scss
+        ³       custom-calendar.ts
+        ³       
+        ÃÄÄÄmap
+        ³       map.html
+        ³       map.scss
+        ³       map.ts
+        ³       
+        ÀÄÄÄproduct-card
+                product-card.html
+                product-card.scss
+                product-card.spec.ts
+                product-card.ts
+                

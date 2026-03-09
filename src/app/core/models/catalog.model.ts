@@ -24,17 +24,17 @@ export interface Product {
 
 //Stats data
 export interface CategoryStat {
-  label: string; // Nombre de la categoría
-  value: string | number; // COUNT() suele venir como string en getRawMany()
+  label: string; 
+  value: string | number; 
 }
 
-// Estructura para el gráfico de Barras (Tendencias)
+// Estructura para el gráfico de Barras 
 export interface TrendStat {
   month: string; // Formato 'YYYY-MM'
   total: string | number;
 }
 
-// Estructura para los contadores rápidos
+// Estructura para los contadores
 export interface SummaryStats {
   totalProducts: number;
   activeProducts: number;

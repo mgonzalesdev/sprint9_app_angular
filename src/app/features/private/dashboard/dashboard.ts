@@ -12,24 +12,7 @@ import { Chart } from '@shared/components/chart/chart';
 export class Dashboard {
   private statsService = inject(StatsService);
 
-  /*stats = toSignal(this.statsService.getSummary());
-  statusData = computed(() => ({
-    labels: this.stats()?.statusDist.map(s => s.label) || [],
-    datasets: [{
-      data: this.stats()?.statusDist.map(s => s.count) || [],
-      backgroundColor: ['#4caf50', '#ff9800', '#9e9e9e']
-    }]
-  }));
-
-  categoryData = computed(() => ({
-    labels: this.stats()?.categoryDist.map(c => c.label) || [],
-    datasets: [{
-      label: 'Objetos Salvados ♻️',
-      data: this.stats()?.categoryDist.map(c => c.count) || [],
-      backgroundColor: '#2196f3'
-    }]
-  }));*/
-  // 1. Signals de datos crudos (API)
+  // Signals de datos (API)
   rawPie = toSignal(this.statsService.getPieChartData(), { initialValue: [] as any });
   rawBar = toSignal(this.statsService.getBarChartData(), { initialValue: [] as any });
   summary = toSignal(this.statsService.getSummary(), { initialValue: { totalProducts: 0, activeProducts: 0 } });
@@ -37,7 +20,6 @@ export class Dashboard {
 
   categoryPieData = computed(() => {
     const data = this.rawPie();
-    // Verificamos que sea un array antes de mapear
     const stats = Array.isArray(data) ? data : [];
 
     return {

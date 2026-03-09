@@ -1,14 +1,14 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CatalogService } from '@core/services/catalog';
-import { ProductService } from '@core/services/product.service';
+import { ProductService } from '@core/services/product';
 import { Map } from '@shared/components/map/map';
 
 @Component({
   selector: 'app-product-form',
-  imports: [ReactiveFormsModule, Map],
+  imports: [ReactiveFormsModule, Map,RouterLink],
   templateUrl: './product-form.html',
   styleUrl: './product-form.scss',
 })

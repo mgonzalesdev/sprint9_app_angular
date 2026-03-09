@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core'; // Importa tipos para evitar errores
+import { CalendarOptions } from '@fullcalendar/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction'; // Necesario para clics
+import interactionPlugin from '@fullcalendar/interaction';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import esLocale from '@fullcalendar/core/locales/es';
 
 @Component({
   selector: 'app-custom-calendar',
@@ -20,24 +21,22 @@ export class CustomCalendar {
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
-    /*selectable: true, // Permite seleccionar fechas
-    dateClick: (info) => this.handleDateClick(info), // Captura el clic
-    events: [
-      { title: 'Evento Demo', start: new Date() }
-    ]*/
+
+    locale: esLocale,
+    firstDay: 1,
     dateClick: (arg) => this.openModal(arg.dateStr),
-    events: []
+    events: [{ title: 'Evento Registrado', start: new Date() }]//leer eventos guardados desde la api
   };
   openModal(date: string) {
     this.selectedDateStr = date;
     this.showModal = true;
   }
 
-  saveEvent() {
+  saveEvent() { // Acá se debe guardar el evento mediante la api
     if (this.newEventTitle) {
       const newEvent = { title: this.newEventTitle, start: this.selectedDateStr };
-      // Actualizamos los eventos de forma reactiva
       this.calendarOptions.events = [...(this.calendarOptions.events as any[]), newEvent];
+      console.log(this.calendarOptions.events);
       this.closeModal();
     }
   }
@@ -46,15 +45,6 @@ export class CustomCalendar {
     this.showModal = false;
     this.newEventTitle = '';
   }
-
-  handleDateClick(arg: any) {
-    const title = prompt('Introduce el nombre del evento:');
-    if (title) {
-      // Lógica para registrar el evento (local o vía API)
-      this.calendarOptions.events = [
-        ...(this.calendarOptions.events as any[]),
-        { title, start: arg.dateStr, allDay: arg.allDay }
-      ];
-    }
-  }
+  //Implementar editar y eliminar eventos
+  
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ProductService } from '@core/services/product.service';
+import { ProductService } from '@core/services/product';
 import { Map } from '@shared/components/map/map';
 import { switchMap } from 'rxjs';
 

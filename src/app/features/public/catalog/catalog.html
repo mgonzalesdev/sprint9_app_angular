@@ -1,8 +1,44 @@
-    <div class="grid">
+<!--     <div class="grid">
         <h1>Catalogo</h1>
       @for (item of products(); track item.id) {
         <app-product-card [product]="item" />
       } @empty {
         <p>No hay regalos disponibles en este momento. 🎁</p>
       }
+    </div>-->
+<div class="max-w-7xl mx-auto p-6">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-slate-800">Regalos disponibles 🎁</h1>
+    
+    <!-- Switcher de Vista -->
+    <div class="inline-flex rounded-lg shadow-sm bg-slate-100 p-1">
+      <button (click)="viewMode.set('grid')" 
+              [class.bg-white]="viewMode() === 'grid'"
+              [class.shadow-sm]="viewMode() === 'grid'"
+              class="px-4 py-2 rounded-md text-sm font-medium transition-all">
+        Cuadrícula
+      </button>
+      <button (click)="viewMode.set('map')" 
+              [class.bg-white]="viewMode() === 'map'"
+              [class.shadow-sm]="viewMode() === 'map'"
+              class="px-4 py-2 rounded-md text-sm font-medium transition-all">
+        Mapa 📍
+      </button>
     </div>
+  </div>
+
+  <!-- Renderizado Condicional -->
+  @if (viewMode() === 'grid') {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
+      @for (item of products(); track item.id) {
+        <app-product-card [product]="item" />
+      } @empty {
+        <p class="col-span-full text-center text-slate-500 py-10">No hay regalos cerca de ti... aún.</p>
+      }
+    </div>
+  } @else {
+    <div class="animate-in zoom-in-95 duration-300">
+      <app-catalog-map [products]="products()" />
+    </div>
+  }
+</div>
