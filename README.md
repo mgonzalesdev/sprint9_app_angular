@@ -92,7 +92,7 @@ El sistema implementa un **redondeo de coordenadas** en el frontend antes de env
 | :---: | :---: |
 | *Vista del listado de objetos* | *Objetos localizados en el mapa* |
 
-| ![Dashboard de Impacto](/public/screenshots/impacto.png) | ![Gestión de mis objetos](/public/screenshots/crud.png) |
+| ![Dashboard de Impacto](/public/screenshots/impacto.png) | ![Gestión de mis objetos](/public/screenshots/admin.png) |
 | :---: | :---: |
 | *Vista del panel de estadísticas* | *Gestión de objetos* |
 
