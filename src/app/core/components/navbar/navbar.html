@@ -18,7 +18,11 @@
 
         <a routerLink="/manage/list" routerLinkActive="text-indigo-600"
           class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mis Objetos</a>
-
+        @if (authService.isAuthenticated()) {
+        <button (click)="onLogout()" class="text-red-500 font-bold">Salir</button>
+        } @else {
+        <a routerLink="/auth/login" class="text-indigo-600">Entrar 🔑 </a>
+        }
         <!-- <button routerLink="/manage/new" 
                 class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-full font-semibold transition-all shadow-md hover:shadow-lg active:scale-95">
           Regalar algo
@@ -49,6 +53,11 @@
           Regalar algo
         </button>
       </div>
+      @if (authService.isAuthenticated()) {
+      <button (click)="onLogout()" class="text-red-500 font-bold">Salir</button>
+      } @else {
+      <a routerLink="/auth/login" class="text-indigo-600">Entrar 🔑 </a>
+      }
     </div>
   </div>
   }

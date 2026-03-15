@@ -7,8 +7,8 @@ import { CatalogMap } from './components/catalog-map/catalog-map';
 @Component({
   selector: 'app-catalog',
   imports: [ProductCard, CatalogMap],
-  templateUrl: './catalog.html',
-  styleUrl: './catalog.scss',
+  templateUrl: './catalog.page.html',
+  styleUrl: './catalog.page.scss',
 })
 export class Catalog {
   private productService = inject(ProductService);
