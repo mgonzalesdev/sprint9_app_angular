@@ -194,7 +194,7 @@
         </div>
         <div class="p-6 grid-cols-1 gap-6 flex-col flex">
           @for (item of products(); track item.id) {
-          <app-product-admin-row [product]="item"> </app-product-admin-row>
+          <app-product-admin-row [product]="item" (onDelete)="deleteProduct($event)"> </app-product-admin-row>
           } @empty {
           <div class="p-10 text-center text-slate-500">No tienes objetos publicados aún.</div>
           }
