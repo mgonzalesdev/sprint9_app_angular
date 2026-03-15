@@ -27,7 +27,7 @@ export class Login {
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
         console.log('Login exitoso en NestJS ✅');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/manage/list']);
       },
       error: (err) => {
         this.errorMessage.set(err.error?.message || 'Credenciales incorrectas ❌');

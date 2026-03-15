@@ -1,1 +1,21 @@
 @import 'tailwindcss';
+@theme {
+  /* Colores de EcoRegalo extraídos de Stitch */
+  --color-primary: #2d5927;
+  --color-background-light: #f6f7f6;
+  --color-background-dark: #161d15;
+
+  /* Tipografía y bordes */
+  --font-display: "Inter", sans-serif;
+  
+  --radius-default: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+/* Opcional: Si quieres que el "font-display" sea el predeterminado en toda la app */
+@layer base {
+  body {
+    @apply font-display;
+  }
+}

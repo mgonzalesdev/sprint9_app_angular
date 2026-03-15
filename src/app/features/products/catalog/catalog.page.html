@@ -1,34 +1,63 @@
-<div class="max-w-7xl mx-auto p-6">
+<!-- <div class="max-w-7xl mx-auto p-6">
   <div class="flex justify-between items-center mb-8">
     <h1 class="text-3xl font-bold text-slate-800">Regalos disponibles 🎁</h1>
-    
+
     <div class="inline-flex rounded-lg shadow-sm bg-slate-100 p-1">
-      <button (click)="viewMode.set('grid')" 
-              [class.bg-white]="viewMode() === 'grid'"
-              [class.shadow-sm]="viewMode() === 'grid'"
-              class="px-4 py-2 rounded-md text-sm font-medium transition-all">
+      <button (click)="viewMode.set('grid')" [class.bg-white]="viewMode() === 'grid'"
+        [class.shadow-sm]="viewMode() === 'grid'" class="px-4 py-2 rounded-md text-sm font-medium transition-all">
         Cuadrícula
       </button>
-      <button (click)="viewMode.set('map')" 
-              [class.bg-white]="viewMode() === 'map'"
-              [class.shadow-sm]="viewMode() === 'map'"
-              class="px-4 py-2 rounded-md text-sm font-medium transition-all">
+      <button (click)="viewMode.set('map')" [class.bg-white]="viewMode() === 'map'"
+        [class.shadow-sm]="viewMode() === 'map'" class="px-4 py-2 rounded-md text-sm font-medium transition-all">
         Mapa 📍
       </button>
     </div>
   </div>
 
   @if (viewMode() === 'grid') {
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
-      @for (item of products(); track item.id) {
-        <app-product-card [product]="item" />
-      } @empty {
-        <p class="col-span-full text-center text-slate-500 py-10">No hay regalos cerca de ti... aún.</p>
-      }
-    </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
+    @for (item of products(); track item.id) {
+    <app-product-card [product]="item" />
+    } @empty {
+    <p class="col-span-full text-center text-slate-500 py-10">No hay regalos cerca de ti... aún.</p>
+    }
+  </div>
   } @else {
-    <div class="animate-in zoom-in-95 duration-300">
-      <app-catalog-map [products]="products()" />
-    </div>
+  <div class="animate-in zoom-in-95 duration-300">
+    <app-catalog-map [products]="products()" />
+  </div>
+  }
+</div>-->
+
+<div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  <div>
+    <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Artículos Disponibles</h2>
+    <p class="text-sm text-slate-500">Explora objetos disponibles cerca de ti</p>
+  </div>
+  <div class="inline-flex rounded-lg bg-primary/5 p-1 border border-primary/10">
+    <button (click)="viewMode.set('grid')"  [class.bg-white]="viewMode() === 'grid'"  [class.shadow-sm]="viewMode() === 'grid'"
+      class="flex items-center gap-2 rounded-md dark:bg-primary px-4 py-1.5 text-sm font-semibold text-primary dark:text-white ">
+      <span class="material-symbols-outlined text-lg">grid_view</span>
+      Galería
+    </button>
+    <button (click)="viewMode.set('map')" [class.bg-white]="viewMode() === 'map'" [class.shadow-sm]="viewMode() === 'map'"
+      class="flex items-center gap-2 rounded-md px-4 py-1.5 text-sm font-semibold text-slate-500 hover:text-primary transition-colors">
+      <span class="material-symbols-outlined text-lg">map</span>
+      Mapa
+    </button>
+  </div>
+</div>
+@if (viewMode() === 'grid') {
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
+  <!-- <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">-->
+  @for (item of products(); track item.id) {
+  <app-product-card [product]="item" />
+  } @empty {
+  <p class="col-span-full text-center text-slate-500 py-10">No hay regalos cerca de ti... aún.</p>
   }
 </div>
+} @else {
+<div class="animate-in zoom-in-95 duration-300">
+  <app-catalog-map [products]="products()" />
+</div>
+}

@@ -4,10 +4,11 @@ import { RouterLink } from '@angular/router';
 import { Product } from '@core/models/catalog.model';
 import { ProductService } from '@core/services/product';
 import { CustomCalendar } from '@shared/components/custom-calendar/custom-calendar';
+import { ProductAdminRow } from '@shared/components/product-admin-row/product-admin-row';
 
 @Component({
   selector: 'app-product-admin-list',
-  imports: [CommonModule, RouterLink,CustomCalendar],
+  imports: [CommonModule, RouterLink,CustomCalendar, ProductAdminRow],
   templateUrl: './product-admin-list.html',
   styleUrl: './product-admin-list.scss',
 })

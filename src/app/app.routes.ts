@@ -6,42 +6,47 @@ import { ProductDetail } from '@features/products/product-detail/product-detail'
 import { Catalog } from '@features/products/catalog/catalog.page';
 import { Login } from '@core/auth/login/login';
 import { authGuard } from '@core/auth/guards/auth.guard';
+import { AdminLayout } from '@core/layouts/admin-layout/admin-layout';
+import { PublicLayout } from '@core/layouts/public-layout/public-layout';
 
 export const routes: Routes = [
-    /* // { path: '', component: Catalog },
-     { path: 'catalog', component: Catalog},
-     { path: 'product/:id', component: ProductDetail }, // Ruta dinámica
-     { path: '', redirectTo: 'catalog', pathMatch: 'full' },
-     { path: 'manage/new', component: ProductForm },
-     { path: 'manage/edit/:id', component: ProductForm },
-     { path: 'manage/list', component: ProductAdminList},
+  
+  // 1. DISEÑO PÚBLICO (Layout con Sidebar - Diseño 1 de Stitch)
+  {
+    path: '',
+    component: PublicLayout,
+    children: [
+      { path: 'catalog', component: Catalog },
+      { path: 'product/:id', component: ProductDetail },
+      { path: '', redirectTo: 'catalog', pathMatch: 'full' }
+    ]
+  },
+
+  // 2. DISEÑO PRIVADO/ADMIN (Layout Ancho Completo - Diseño 2 de Stitch)
+  {
+    path: '',
+    component: AdminLayout,
+    canActivate: [authGuard],
+    children: [
       { path: 'dashboard', component: Dashboard },
-      {  path: 'auth',
-   children: [
-     { path: 'login', component: Login },
-     // { path: 'register', component: RegisterComponent }
-   ]}
- */
-    // Rutas Públicas
-    { path: 'catalog', component: Catalog },
-    { path: 'product/:id', component: ProductDetail },
-    { path: 'auth/login', component: Login },
-
-    // Rutas Protegidas (Solo con Login)
-    {
-        path: 'dashboard',
-        component: Dashboard,
-        canActivate: [authGuard]
-    },
-    {
+      {
         path: 'manage',
-        canActivate: [authGuard],
         children: [
-            { path: 'list', component: ProductAdminList },
-            { path: 'new', component: ProductForm },
-            { path: 'edit/:id', component: ProductForm },
+          { path: 'list', component: ProductAdminList },
+          { path: 'new', component: ProductForm },
+          { path: 'edit/:id', component: ProductForm },
         ]
-    },
+      }
+    ]
+  },
 
-    { path: '', redirectTo: 'catalog', pathMatch: 'full' }
+  // 3. DISEÑO DE AUTENTICACIÓN (Sin Navbar/Sidebar)
+  { 
+    path: 'auth/login', 
+    component: Login 
+    // Aquí podrías envolverlo en un AuthLayout si quieres un fondo especial
+  },
+
+  // Comodín para rutas no encontradas
+  { path: '**', redirectTo: 'catalog' }
 ];
