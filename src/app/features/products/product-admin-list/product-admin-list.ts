@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '@core/models/catalog.model';
 import { ProductService } from '@core/services/product';
@@ -8,7 +8,7 @@ import { ProductAdminRow } from '@shared/components/product-admin-row/product-ad
 
 @Component({
   selector: 'app-product-admin-list',
-  imports: [CommonModule, RouterLink,CustomCalendar, ProductAdminRow],
+  imports: [CommonModule, CustomCalendar, ProductAdminRow],
   templateUrl: './product-admin-list.html',
   styleUrl: './product-admin-list.scss',
 })
@@ -17,6 +17,8 @@ export class ProductAdminList {
 
   products = signal<Product[]>([]);
   isLoading = signal(true);
+
+  filterSelected = signal<string>('Todos');
 
   constructor() {
     this.loadProducts();
@@ -42,4 +44,30 @@ export class ProductAdminList {
     }
   }
 
+
+  filteredProducts = computed(() => {
+    console.log("se entero");
+    const activeFilter = this.filterSelected();
+    if (activeFilter === 'Todos')
+      return this.products();
+
+    // Filtramos comparando con el nombre que viene en el objeto status de tu API
+    return this.products().filter(p => p.status.name === activeFilter);
+  });
+
+  // 2. CONTADORES: Calculados automáticamente para los botones de Stitch
+  counts = computed(() => {
+    const list = this.products();
+    return {
+      Todos: list.length,
+      Disponible: list.filter(p => p.status.name === 'Disponible').length,
+      Reservado: list.filter(p => p.status.name === 'Reservado').length,
+      Entregado: list.filter(p => p.status.name === 'Entregado').length,
+    };
+  });
+
+  setFilter(statusProduct: string) {
+    console.log('Cambiando filtro a:', statusProduct);
+    this.filterSelected.set(statusProduct);
+  }
 }

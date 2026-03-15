@@ -11,8 +11,10 @@
             </div>
 
             <button
-                class="flex items-center gap-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded border border-emerald-200 hover:bg-emerald-200 transition-colors cursor-pointer">
-                DISPONIBLE <span class="material-symbols-outlined text-[12px]">expand_more</span>
+             [class]="product().status.name | statusColor"
+                class="flex items-center gap-1 text-[10px] font-bold px-2 py-1 
+                rounded border transition-colors cursor-pointer uppercase">
+                 {{ product().status.name }} <span class="material-symbols-outlined text-[12px]">expand_more</span>
             </button>
             <div
                 class="absolute right-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-emerald-100 dark:border-emerald-900/30 py-1 z-20 animate-in fade-in slide-in-from-top-2 duration-200">

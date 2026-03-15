@@ -3,10 +3,11 @@ import { Component, inject, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '@core/models/catalog.model';
 import { ProductService } from '@core/services/product';
+import { StatusColorPipe } from '@shared/pipes/status-color-pipe';
 
 @Component({
   selector: 'app-product-admin-row',
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,StatusColorPipe],
   templateUrl: './product-admin-row.html',
   styleUrl: './product-admin-row.scss',
 })
