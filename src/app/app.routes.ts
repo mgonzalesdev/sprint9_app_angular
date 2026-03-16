@@ -4,11 +4,12 @@ import { ProductAdminList } from '@features/products/product-admin-list/product-
 import { ProductForm } from '@features/products/product-form/product-form';
 import { ProductDetail } from '@features/products/product-detail/product-detail';
 import { Catalog } from '@features/products/catalog/catalog.page';
-import { Login } from '@core/auth/login/login';
+import { Login } from '@features/auth/login/login';
 import { authGuard } from '@core/auth/guards/auth.guard';
 import { AdminLayout } from '@core/layouts/admin-layout/admin-layout';
 import { PublicLayout } from '@core/layouts/public-layout/public-layout';
 import { AuthLayout } from '@core/layouts/auth-layout/auth-layout';
+import { Register } from '@features/auth/register/register';
 
 export const routes: Routes = [
   
@@ -47,6 +48,7 @@ export const routes: Routes = [
     component: AuthLayout,
     children: [
       { path: 'login', component: Login },
+      { path: 'register', component: Register },
    //   { path: 'register', component: RegisterComponent }, // Aquí irá tu registro
     ]
   },

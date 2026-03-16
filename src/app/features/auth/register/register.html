@@ -1,0 +1,64 @@
+<div class="text-center mb-8">
+  <div routerLink="/" class="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-xl mb-4 shadow-lg shadow-primary-200 cursor-pointer">
+    <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+  </div>
+  <h2 class="text-3xl font-bold text-neutral-900 tracking-tight">Crea tu cuenta</h2>
+  <p class="text-neutral-600 mt-2">Únete a la comunidad y empieza a dar vida a tus objetos.</p>
+</div>
+
+<div class="glass-panel p-8 rounded-xl shadow-2xl">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="space-y-5">
+    
+    <!-- Nombre Completo -->
+    <div>
+      <label class="block text-sm font-medium text-neutral-700 mb-1.5">Nombre Completo</label>
+      <input formControlName="name" type="text"
+             class="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-primary-600 outline-none bg-white/50 transition-all"
+             placeholder="Ej. Juan Pérez">
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label class="block text-sm font-medium text-neutral-700 mb-1.5">Correo Electrónico</label>
+      <input formControlName="email" type="email"
+             class="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-primary-600 outline-none bg-white/50 transition-all"
+             placeholder="nombre@ejemplo.com">
+    </div>
+
+    <!-- Contraseñas en Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 mb-1.5">Contraseña</label>
+        <input formControlName="password" type="password"
+               class="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-primary-600 outline-none bg-white/50"
+               placeholder="••••••••">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 mb-1.5">Confirmar</label>
+        <input formControlName="confirmPassword" type="password"
+               class="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-primary-600 outline-none bg-white/50"
+               placeholder="••••••••">
+      </div>
+    </div>
+
+    <!-- Términos -->
+    <div class="flex items-start gap-3 py-2">
+      <input formControlName="terms" type="checkbox"
+             class="h-5 w-5 rounded border-neutral-300 text-primary-600 focus:ring-primary-600 cursor-pointer">
+      <label class="text-sm text-neutral-600 cursor-pointer">
+        Acepto los <a class="text-primary-700 font-semibold hover:underline">Términos de Servicio</a>.
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid"
+            class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-lg shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50">
+      Empezar Ahora
+      <span class="material-symbols-outlined text-lg">arrow_forward</span>
+    </button>
+  </form>
+
+  <p class="mt-8 text-center text-sm text-neutral-600">
+    ¿Ya eres parte? 
+    <a routerLink="/auth/login" class="font-medium text-primary-700 hover:text-primary-800 transition-colors">Inicia sesión aquí</a>
+  </p>
+</div>

@@ -22,7 +22,9 @@ export class AuthService {
 
   login(credentials: any) {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+      
       tap(response => {
+        console.log(response);
         // Guardamos el JWT que viene de NestJS
         localStorage.setItem('token', response.accessToken);
         this._currentUser.set(response.user);
@@ -49,5 +51,17 @@ export class AuthService {
       // Aquí podrías setear un usuario básico o llamar a un endpoint /me
       this._currentUser.set({ hasToken: true });
     }
+  }
+  register(userData: any) {
+    // URL de tu endpoint de registro en NestJS
+    return this.http.post<any>(`${this.apiUrl}/register`, userData).pipe(
+      tap(response => {
+        // Opcional: Si tu API loguea automáticamente al registrar, guarda el token
+        if (response.access_token) {
+          localStorage.setItem('token', response.access_token);
+          this._currentUser.set(response.user);
+        }
+      })
+    );
   }
 }
