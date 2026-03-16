@@ -5,6 +5,14 @@
   --color-background-light: #f6f7f6;
   --color-background-dark: #161d15;
 
+    --color-primary-50: #f0fdf4;
+  --color-primary-600: #16a34a;
+  --color-primary-700: #15803d;
+  
+  --color-neutral-50: #f8fafc;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-700: #334155;
+
   /* Tipografía y bordes */
   --font-display: "Inter", sans-serif;
   
@@ -18,4 +26,9 @@
   body {
     @apply font-display;
   }
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }

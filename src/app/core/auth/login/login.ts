@@ -13,6 +13,7 @@ export class Login {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
+  showPassword = false;
 
   errorMessage = signal<string | null>(null);
 

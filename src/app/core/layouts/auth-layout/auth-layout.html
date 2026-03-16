@@ -1,0 +1,14 @@
+<main class="min-h-screen flex items-center justify-center relative overflow-hidden py-12 px-4 bg-neutral-50">
+  <!-- Fondo de Bosque (Stitch Design) -->
+  <div class="absolute inset-0 z-0">
+    <img class="w-full h-full object-cover opacity-20" 
+         src="media/fondo-auth.png" 
+         alt="Fondo natural">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-50/80 via-transparent to-primary-100/50"></div>
+  </div>
+
+  <!-- Aquí se inyectará el Login o el Register -->
+  <div class="relative z-10 w-full max-w-md">
+    <router-outlet></router-outlet>
+  </div>
+</main>

@@ -8,6 +8,7 @@ import { Login } from '@core/auth/login/login';
 import { authGuard } from '@core/auth/guards/auth.guard';
 import { AdminLayout } from '@core/layouts/admin-layout/admin-layout';
 import { PublicLayout } from '@core/layouts/public-layout/public-layout';
+import { AuthLayout } from '@core/layouts/auth-layout/auth-layout';
 
 export const routes: Routes = [
   
@@ -42,9 +43,12 @@ export const routes: Routes = [
 
   // 3. DISEÑO DE AUTENTICACIÓN (Sin Navbar/Sidebar)
   { 
-    path: 'auth/login', 
-    component: Login 
-    // Aquí podrías envolverlo en un AuthLayout si quieres un fondo especial
+    path: 'auth', 
+    component: AuthLayout,
+    children: [
+      { path: 'login', component: Login },
+   //   { path: 'register', component: RegisterComponent }, // Aquí irá tu registro
+    ]
   },
 
   // Comodín para rutas no encontradas
