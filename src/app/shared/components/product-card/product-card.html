@@ -17,7 +17,7 @@
       <div class="p-4">
             <div class="flex items-center justify-between mb-1">
                   <span class="flex items-center gap-1 text-[10px] font-bold text-primary uppercase">
-                        <span class="material-symbols-outlined text-xs">chair</span> {{ product().category.name }}
+                        <span class="material-symbols-outlined text-xs"> {{ product().category.name | categoryIcon }}</span> {{ product().category.name }}
                   </span>
                   <span class="text-[10px] font-medium text-slate-400">Hace 2h</span>
             </div>
