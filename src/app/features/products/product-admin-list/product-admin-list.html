@@ -106,7 +106,6 @@
 </div>-->
 
 <div class="flex flex-col gap-8">
-
   <section
     class="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-primary/5">
     <div class="flex items-center gap-6">
@@ -122,7 +121,7 @@
         </div>
       </div>
       <div>
-        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">¡Hola, Lucía García!</h1>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">¡Hola, {{ authService.currentUser()?.name }}!</h1>
         <p class="text-slate-500 dark:text-slate-400 font-medium">Guardián de la Tierra • Miembro desde 2023</p>
         <div class="mt-2 flex gap-2">
           <span
@@ -178,20 +177,7 @@
             <span class="material-symbols-outlined text-[20px]">add_circle</span> Añadir Objeto
           </button>
         </div>
-        <!-- <div
-          class="px-6 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 overflow-x-auto">
-          <span class="text-xs font-bold text-slate-400 uppercase mr-2">Filtrar:</span>
-          <button class="px-3 py-1 rounded-full text-xs font-bold bg-primary text-white shadow-sm">Todos</button>
-          <button
-            class="px-3 py-1 rounded-full text-xs font-bold bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-colors">Disponibles
-            (1)</button>
-          <button
-            class="px-3 py-1 rounded-full text-xs font-bold bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-colors">Reservados
-            (1)</button>
-          <button
-            class="px-3 py-1 rounded-full text-xs font-bold bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-colors">Entregados
-            (1)</button>
-        </div>-->
+
         <div
           class="px-6 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 flex items-center gap-2 overflow-x-auto">
           <span class="text-xs font-bold text-slate-400 uppercase mr-2 shrink-0">Filtrar:</span>
@@ -227,24 +213,11 @@
                   <p class="text-xs text-slate-500 mt-1">Cámara vintage en perfecto estado funcional. Incluye funda de
                     cuero.</p>
                 </div>
-
                 <button
                   class="flex items-center gap-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded border border-emerald-200 hover:bg-emerald-200 transition-colors cursor-pointer">
                   DISPONIBLE <span class="material-symbols-outlined text-[12px]">expand_more</span>
                 </button>
-                <div
-                  class="absolute right-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-emerald-100 dark:border-emerald-900/30 py-1 z-20 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <button
-                    class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-700 transition-colors flex items-center gap-2">
-                    <span class="size-2 rounded-full bg-amber-400"></span>
-                    Marcar como Reservado
-                  </button>
-                  <button
-                    class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-700 transition-colors flex items-center gap-2">
-                    <span class="size-2 rounded-full bg-slate-300"></span>
-                    Marcar como Entregado
-                  </button>
-                </div>
+
               </div>
               <div class="flex items-center gap-4 mt-3">
                 <button
@@ -266,15 +239,27 @@
               style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-DU7kWM3UELkOqbHwEgYLOOIDtu7HjIvmSlm-3kD906kcGi_w9fjtCbs04OSaFEWO20lbF2jzvvZsFldvXjky9YUS1pfBs4L2E0_azWOJE6MG_we_SE71457tZEMNfSSTSQAo-lDicf22fCjvHvPAZ9VDjiO_NCZy-CmtoRaUlbiOx97RVmajEwwnLXNh6Qko3zJyPcrobvwhd1x5UBX7ztK0rGGY52EQ2Z8zYTjlpV4FskyAogm4zxPCkgB_tyTBMTjbefJM-kY");'>
             </div>
             <div class="flex-1 flex flex-col justify-between">
-              <div class="flex justify-between items-start">
+              <div class="flex justify-between items-start relative">
                 <div>
                   <h4 class="font-bold text-slate-900 dark:text-white">Silla Escritorio</h4>
                   <p class="text-xs text-slate-500 mt-1">Silla ergonómica ideal para teletrabajo. Muy poco uso.</p>
                 </div>
-                <button
-                  class="flex items-center gap-1 bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded border border-amber-200 hover:bg-amber-200 transition-colors cursor-pointer">
-                  RESERVADO <span class="material-symbols-outlined text-[12px]">expand_more</span>
-                </button>
+                <div class="relative">
+                  <button
+                    class="flex items-center gap-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded border border-emerald-200 hover:bg-emerald-200 transition-colors cursor-pointer">
+                    DISPONIBLE <span class="material-symbols-outlined text-[12px]">expand_more</span>
+                  </button>
+                  <!-- Dropdown Menu -->
+                  <div
+                    class="absolute right-0 mt-1 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 z-50 overflow-hidden">
+                    <button
+                      class="w-full text-left px-4 py-2 text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">Marcar
+                      como Reservado</button>
+                    <button
+                      class="w-full text-left px-4 py-2 text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">Marcar
+                      como Entregado</button>
+                  </div>
+                </div>
               </div>
               <div class="flex items-center gap-4 mt-3">
                 <button

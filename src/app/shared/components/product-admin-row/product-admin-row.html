@@ -14,21 +14,9 @@
              [class]="product().status.name | statusColor"
                 class="flex items-center gap-1 text-[10px] font-bold px-2 py-1 
                 rounded border transition-colors cursor-pointer uppercase">
-                 {{ product().status.name }} <span class="material-symbols-outlined text-[12px]">expand_more</span>
+                 {{ product().status.name }} <!--<span class="material-symbols-outlined text-[12px]">expand_more</span>-->
             </button>
-            <div
-                class="absolute right-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-emerald-100 dark:border-emerald-900/30 py-1 z-20 animate-in fade-in slide-in-from-top-2 duration-200">
-                <button
-                    class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-700 transition-colors flex items-center gap-2">
-                    <span class="size-2 rounded-full bg-amber-400"></span>
-                    Marcar como Reservado
-                </button>
-                <button
-                    class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-700 transition-colors flex items-center gap-2">
-                    <span class="size-2 rounded-full bg-slate-300"></span>
-                    Marcar como Entregado
-                </button>
-            </div>
+
         </div>
         <div class="flex items-center gap-4 mt-3">
             <button [routerLink]="['/manage/edit', product().id]" 

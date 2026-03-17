@@ -89,7 +89,8 @@
       <!-- FOTO DE PERFIL (Stitch): Solo si está logueado. Lleva a Mis Objetos -->
       <div (click)="goToManageList()"
         class="h-10 w-10 rounded-full border-2 border-primary/20 bg-cover bg-center cursor-pointer hover:ring-2 hover:ring-primary/40 transition-all"
-        title="Mis Objetos" style="background-image: url('https://lh3.googleusercontent.com')">
+        title="Mis Objetos" 
+         [style.backgroundImage]="authService.currentUser()?.photo ? 'url(' + authService.currentUser()?.photo + ')' : 'url(media/person.png)'">
       </div><button (click)="onLogout()" class="text-red-500 font-bold">Salir</button>
       } @else {
       <!-- ICONO PERSONA (Stitch): Si NO está logueado. Lleva al Login -->

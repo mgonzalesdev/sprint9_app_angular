@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '@core/auth/auth.service';
 import { Product } from '@core/models/catalog.model';
 import { ProductService } from '@core/services/product';
 import { CustomCalendar } from '@shared/components/custom-calendar/custom-calendar';
@@ -14,6 +15,9 @@ import { ProductAdminRow } from '@shared/components/product-admin-row/product-ad
 })
 export class ProductAdminList {
   private productService = inject(ProductService);
+  authService = inject(AuthService);
+
+  // adminName = computed(() => this.authService.currentUser()?.name || 'Admin');
 
   products = signal<Product[]>([]);
   isLoading = signal(true);
@@ -44,9 +48,8 @@ export class ProductAdminList {
     }
   }
 
-
   filteredProducts = computed(() => {
-    console.log("se entero");
+
     const activeFilter = this.filterSelected();
     if (activeFilter === 'Todos')
       return this.products();
