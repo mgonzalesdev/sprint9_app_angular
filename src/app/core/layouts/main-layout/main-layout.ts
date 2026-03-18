@@ -4,11 +4,11 @@ import { Footer } from '@core/components/footer/footer';
 import { Navbar } from '@core/components/navbar/navbar';
 
 @Component({
-  selector: 'app-public-layout',
+  selector: 'app-main-layout',
   imports: [Navbar,RouterOutlet,Footer],
-  templateUrl: './public-layout.html',
-  styleUrl: './public-layout.scss',
+  templateUrl: './main-layout.html',
+  styleUrl: './main-layout.scss',
 })
-export class PublicLayout {
+export class MainLayout {
 
 }
