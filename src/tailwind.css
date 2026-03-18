@@ -1,21 +1,32 @@
 @import 'tailwindcss';
+
 @theme {
   /* Colores de EcoRegalo extraídos de Stitch */
   --color-primary: #2d5927;
   --color-background-light: #f6f7f6;
   --color-background-dark: #161d15;
 
-    --color-primary-50: #f0fdf4;
+  /*--color-primary-50: #f0fdf4;
   --color-primary-600: #16a34a;
-  --color-primary-700: #15803d;
-  
+  --color-primary-700: #15803d;*/
+  --color-primary-50: #f1f8f3;
+  --color-primary-100: #dcece1;
+  --color-primary-200: #bbd9c5;
+  --color-primary-300: #8ebf9f;
+  --color-primary-400: #5f9f74;
+  --color-primary-500: #3d8256;
+  --color-primary-600: #2e6844;
+  --color-primary-700: #265438;
+  --color-primary-800: #21432f;
+  --color-primary-900: #1c3828;
+
   --color-neutral-50: #f8fafc;
   --color-neutral-200: #e2e8f0;
   --color-neutral-700: #334155;
 
   /* Tipografía y bordes */
   --font-display: "Inter", sans-serif;
-  
+
   --radius-default: 0.25rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
@@ -27,6 +38,7 @@
     @apply font-display;
   }
 }
+
 .glass-panel {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);

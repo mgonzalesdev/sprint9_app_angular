@@ -29,7 +29,9 @@
   }
 </div>-->
 <div class="flex flex-col md:flex-row w-full h-full">
-  <app-catalog-aside></app-catalog-aside>
+  <app-catalog-aside   [currentCategory]="selectedCategory()"
+    (categoryChange)="handleCategoryChange($event)"
+    (proximityChange)="handleProximityChange($event)"></app-catalog-aside>
   <section class="flex-1 p-6">
     <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
@@ -52,17 +54,10 @@
       </div>
     </div>
     @if (viewMode() === 'grid') {
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
-      <!-- <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">-->
-      @for (item of products(); track item.id) {
-      <app-product-card [product]="item" />
-      } @empty {
-      <p class="col-span-full text-center text-slate-500 py-10">No hay regalos cerca de ti... aún.</p>
-      }
-    </div>
+    <app-catalog-grid [products]="filteredProducts()"></app-catalog-grid>
     } @else {
     <div class="animate-in zoom-in-95 duration-300">
-      <app-catalog-map [products]="products()" />
+      <app-catalog-map [products]="filteredProducts()" />
     </div>
     }
   </section>

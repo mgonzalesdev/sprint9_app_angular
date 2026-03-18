@@ -1,15 +1,232 @@
-    @if (product(); as item) {
-      <div class="detail-container">
-        <h1>{{ item.name }}</h1>
-        <p>{{ item.description }}</p>
-         <p>Categoría: <strong>{{ item.category.name }}</strong></p>
-    <p>Estado: <strong>{{ item.status.name }}</strong></p>
-    <p>Condición: <strong>{{ item.condition.name }}</strong></p>
-        <h3>Ubicación de entrega</h3>
-        <!-- Pasamos coordenadas fijas por ahora o desde el objeto si las tienes -->
-            <app-map [lat]="+item.latitude" [lng]="+item.longitude" />
-        
-        <button class="btn-primary">Contactar para recoger</button>
+<main class="max-w-7xl mx-auto px-4 py-8">
+  <!-- Main Layout: Bento Style Image Gallery & Sidebar -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Left Column: Product Visuals & Info -->
+    <div class="lg:col-span-8 space-y-8">
+     @if (product(); as item) {
+      <!-- Bento Image Gallery -->
+      <section class="grid grid-cols-4 grid-rows-2 gap-3 h-[500px]">
+        <div class="col-span-3 row-span-2 relative overflow-hidden rounded-xl group">
+          <img alt="Main product view"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            data-alt="Modern cognac leather sofa in bright minimalist living room"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8ZMKnyxc5CFi8vX0wAX2ABGCt1ujYyAxWZI2Dr_GJsWKmmpapT0dl_SFuXzkMd9CUQVknLZZmV9Hy9uyCKpApkELpRwet_oq5lzJwx0JF4wb3rT4nqgf9Ce2Y6DmQFoLqsfp6Gomu4BNoZEel8Xg9n4JhOV3qoA7Xomt2Izful8ni34889laHtR46oKcTd6XoHbyTK8LzUml3ekw5iXKri8G9jTT97qme_HRB9g3MmrjsBYbwHT3tMKmYbGBwnVyyUdGWNK5HkJc" />
+          <div class="absolute top-4 left-4 flex gap-2">
+            <span
+              class="px-3 py-1 bg-white/90 backdrop-blur shadow-sm rounded-full text-xs font-bold text-primary-700 uppercase tracking-wider">{{item.status.name}}</span>
+            <span
+              class="px-3 py-1 bg-neutral-900/80 backdrop-blur shadow-sm rounded-full text-xs font-bold text-white uppercase tracking-wider">{{item.category.name}}</span>
+          </div>
+        </div>
+        <div class="col-span-1 row-span-1 overflow-hidden rounded-xl">
+          <img alt="Detail view 1" class="w-full h-full object-cover hover:opacity-90 cursor-pointer transition-opacity"
+            data-alt="Close up detail of vintage leather stitching"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuIrTt7I5YXOzBIOiYIGFLJt_3bIFzhEpB-6aq2BiaKCLkZkJ_Dh1vOMPB0zBvoAbKQgy6hjzDyRha5o8NepnNUk2OZsBY3kWLp9PYRMoFFGTK9Gdv5Vx7mIaah9NZJ9V8kr9Sq44DiUqFFZc65AxY8IZxJ__B7foHPruArQ2d0zV3vPXVcpQoWLKqeX17Bk0ZGVvsDftTNO9NabFNlf9vk0R-BkReQmdesnBG4BBOJZo1DD_n_VhhVGwglXkvwBmMPpLKKiTlOhw" />
+        </div>
+        <div class="col-span-1 row-span-1 relative overflow-hidden rounded-xl">
+          <img alt="Detail view 2" class="w-full h-full object-cover hover:opacity-90 cursor-pointer transition-opacity"
+            data-alt="Side profile of luxury leather couch"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsh3ctB-NIWF2QMIE0LGvs7HR8qEXQFqU2vkKq8QICkBVlwYeNCgPbmqJq92a9evUfRM8RuF0kf3gIJVxeGcBvsDO0a6O1OckEVR68dmw7n5XltxY82BI7d5PGbhxXs9ejNx-g6AgdDfe_Q4Od1vrvEBvZb8bLwB_F-5Lfl5vLRxs0MmFtK95RZHnkrOIfK1Ybsv-8Z_UNkcicg-35dqZ623luFDkehYSEjZ6_xyfwd5bZe7IuuGxSba3fDklP1KzQduiGylCS6lo" />
+          <div
+            class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white cursor-pointer hover:bg-black/50 transition-colors">
+            <span class="material-symbols-outlined text-3xl">grid_view</span>
+            <span class="text-xs font-bold mt-1">+12 Fotos</span>
+          </div>
+        </div>
+      </section>
+      <!-- Product Details -->
+      <div class="bg-white rounded-2xl p-8 border border-neutral-200 shadow-sm">
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <h1 class="text-3xl font-headline font-bold text-neutral-900">{{item.name}}</h1>
+            <div class="flex items-center gap-4 mt-2 text-neutral-500">
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">location_on</span>
+                <span class="text-sm">Madrid, España</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                <span class="text-sm">Publicado hace 2 días</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="text-3xl font-bold text-primary-600">Gratis</span>
+            <p class="text-xs text-neutral-400 font-medium">Economía Circular</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y border-neutral-100 mb-6">
+          <div class="bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+            <span class="block text-[10px] uppercase font-bold text-neutral-400 mb-1">Estado</span>
+            <span class="text-sm font-semibold text-neutral-700">{{item.condition.name}}</span>
+          </div>
+          <div class="bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+            <span class="block text-[10px] uppercase font-bold text-neutral-400 mb-1">Color</span>
+            <span class="text-sm font-semibold text-neutral-700">Marrón Cognac</span>
+          </div>
+          <div class="bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+            <span class="block text-[10px] uppercase font-bold text-neutral-400 mb-1">Material</span>
+            <span class="text-sm font-semibold text-neutral-700">Cuero Genuino</span>
+          </div>
+          <div class="bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+            <span class="block text-[10px] uppercase font-bold text-neutral-400 mb-1">Dimensiones</span>
+            <span class="text-sm font-semibold text-neutral-700">210 x 95 x 85 cm</span>
+          </div>
+        </div>
+        <div class="prose prose-sm max-w-none text-neutral-600 leading-relaxed">
+          <p>{{item.description}}</p>
+        </div>
+      </div>
+      <!-- Location Map -->
+      <div class="bg-white rounded-2xl overflow-hidden border border-neutral-200 shadow-sm">
+        <div class="p-6 border-b border-neutral-100 flex justify-between items-center">
+          <h3 class="font-headline font-bold text-neutral-900">Ubicación de recogida</h3>
+          <span class="text-sm text-primary-600 font-medium cursor-pointer">Ver en Google Maps</span>
+        </div>
+        <div class="h-64 bg-neutral-100 relative">
+          <app-map [lat]="+item.latitude" [lng]="+item.longitude" />
+          <img alt="Abstract map pattern of urban city streets" class="w-full h-full object-cover opacity-80 grayscale"
+            data-location="Madrid"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMNXWmkYIZGL201JY_UuNyyKCBKOjOFmeSRbZVV3PEvzLgFQvv5fqOme3T3TxmO0V2dkzavkzWXx7mSFc7Ajets74i951AvUWSpZybReKIoH5He_mnpSWfCUE553IJR7GRS1QSywlbaxk2LviyAv3Z1jOeNxFzCmDy2g31OaznL4j9Q29aUEpo7BDyYcLcACAsjG4IJqsF8SvFv9sXru4hYeHkpYS7_53uu_OE1hq-H2tEn7RovK8Vj5Aa6XD3CLplQkKJiDsB0GA" />
+          <!--<div class="absolute inset-0 flex items-center justify-center">
+            <div class="relative">
+              <span class="material-symbols-outlined text-5xl text-primary-600 animate-bounce"
+                style="font-variation-settings: 'FILL' 1;">location_on</span>
+              <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-1.5 bg-black/20 rounded-full blur-[2px]">
+              </div>
+            </div>
+          </div>-->
+        </div>
+        <div class="p-4 bg-neutral-50">
+          <p class="text-xs text-neutral-500 text-center italic">Ubicación aproximada por privacidad del donante</p>
+        </div>
       </div>
     }
-    <pre>{{ product() | json }}</pre>
+    </div>
+  
+    <!-- Right Column: Sidebar -->
+    <div class="lg:col-span-4 space-y-6">
+      <!-- Donor Info Card -->
+      <div class="bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-4">Donado por</h3>
+        <div class="flex items-center gap-4 mb-6">
+          <img alt="Donor avatar" class="w-14 h-14 rounded-full object-cover border-2 border-primary-100"
+            data-alt="Portrait of a smiling woman with glasses"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRpVcWGX5CgjbNg55hKE4Zuh4DWDOuxPpyPVhaWfW6UOjQ-MiS6FbbzWBV5cGpk7bKsXcyIwH6wI1whvT_Y-BNhku6UcASYhEoH6kLoNAH23WYmP1VK76T_7a0NaeQ2lVZXPLnFODeoXrYD3avI4Yp4RgGki9H_BTIkTnJaQNDDB_-WHRgGEvrD-WFavrWOdMjHjIVE1cM6hy-EgNs6rl5xpvqyPbOBXhF2lkz8Zn62B7nrKAa3SlAyAw_ExKDikscnI43PnPp4co" />
+          <div>
+            <h4 class="font-bold text-neutral-900">Elena Martínez</h4>
+            <div class="flex items-center gap-1 text-primary-600 text-xs font-medium">
+              <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+              <span>Donante Verificado</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="text-center p-3 bg-neutral-50 rounded-xl border border-neutral-100">
+            <div class="text-xl font-bold text-neutral-900">24</div>
+            <div class="text-[10px] uppercase font-bold text-neutral-400">Objetos</div>
+          </div>
+          <div class="text-center p-3 bg-neutral-50 rounded-xl border border-neutral-100">
+            <div class="text-xl font-bold text-neutral-900">4.9</div>
+            <div class="text-[10px] uppercase font-bold text-neutral-400">Puntuación</div>
+          </div>
+        </div>
+        <button
+          class="w-full py-3 border-2 border-primary-600 text-primary-700 font-bold rounded-xl hover:bg-primary-50 transition-colors flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-lg">chat_bubble</span>
+          Enviar Mensaje
+        </button>
+      </div>
+      <!-- Schedule Widget -->
+      <div class="bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm">
+        <h3 class="font-headline font-bold text-neutral-900 mb-4 flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary-600">calendar_today</span>
+          Schedule Pick-up
+        </h3>
+        <div class="space-y-4">
+          <div class="bg-neutral-50 p-4 rounded-xl border border-neutral-100">
+            <!-- Custom Calendar Grid -->
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-sm font-bold">Mayo 2024</span>
+              <div class="flex gap-2">
+                <button class="material-symbols-outlined text-lg p-1 hover:bg-neutral-200 rounded">chevron_left</button>
+                <button
+                  class="material-symbols-outlined text-lg p-1 hover:bg-neutral-200 rounded">chevron_right</button>
+              </div>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center mb-2">
+              <span class="text-[10px] font-bold text-neutral-400">L</span>
+              <span class="text-[10px] font-bold text-neutral-400">M</span>
+              <span class="text-[10px] font-bold text-neutral-400">X</span>
+              <span class="text-[10px] font-bold text-neutral-400">J</span>
+              <span class="text-[10px] font-bold text-neutral-400">V</span>
+              <span class="text-[10px] font-bold text-neutral-400">S</span>
+              <span class="text-[10px] font-bold text-neutral-400">D</span>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center">
+              <button
+                class="h-8 flex items-center justify-center text-xs text-neutral-300 pointer-events-none">28</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs text-neutral-300 pointer-events-none">29</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs text-neutral-300 pointer-events-none">30</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs text-neutral-300 pointer-events-none">31</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium hover:bg-primary-100 rounded-full transition-colors">1</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium hover:bg-primary-100 rounded-full transition-colors">2</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium hover:bg-primary-100 rounded-full transition-colors">3</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium hover:bg-primary-100 rounded-full transition-colors">4</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium hover:bg-primary-100 rounded-full transition-colors">5</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-bold bg-primary-600 text-white rounded-full">6</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium bg-primary-100 text-primary-700 rounded-full">7</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium hover:bg-primary-100 rounded-full transition-colors">8</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium hover:bg-primary-100 rounded-full transition-colors">9</button>
+              <button
+                class="h-8 flex items-center justify-center text-xs font-medium hover:bg-primary-100 rounded-full transition-colors">10</button>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <label class="text-[10px] font-bold uppercase text-neutral-400 tracking-wider px-1">Turno Disponible</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button
+                class="py-2 text-sm font-semibold rounded-lg bg-primary-50 border border-primary-200 text-primary-700">Mañana
+                (10-14h)</button>
+              <button
+                class="py-2 text-sm font-semibold rounded-lg bg-neutral-50 border border-neutral-100 text-neutral-500 hover:border-neutral-200">Tarde
+                (17-21h)</button>
+            </div>
+          </div>
+          <button
+            class="w-full py-4 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 transition-all shadow-lg shadow-primary-200 flex items-center justify-center gap-3">
+            Confirmar Recogida
+          </button>
+        </div>
+      </div>
+      <!-- Environmental Impact Card -->
+      <div
+        class="bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl p-6 text-white overflow-hidden relative">
+        <div class="relative z-10">
+          <span class="material-symbols-outlined text-4xl opacity-50 mb-4"
+            style="font-variation-settings: 'FILL' 1;">eco</span>
+          <h4 class="font-headline font-bold text-lg mb-1">Impacto Ambiental</h4>
+          <p class="text-primary-100 text-sm mb-4">Dando una segunda vida a este sofá evitas la emisión de 45kg de CO2.
+          </p>
+          <div class="h-1.5 w-full bg-white/20 rounded-full">
+            <div class="h-full w-3/4 bg-white rounded-full"></div>
+          </div>
+        </div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<pre>{{ product() | json }}</pre>

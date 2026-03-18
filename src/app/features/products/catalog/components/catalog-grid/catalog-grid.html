@@ -1,0 +1,8 @@
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
+      <!-- <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">-->
+      @for (item of products(); track item.id) {
+      <app-product-card [product]="item" />
+      } @empty {
+      <p class="col-span-full text-center text-slate-500 py-10">No hay regalos cerca de ti... aún.</p>
+      }
+    </div>

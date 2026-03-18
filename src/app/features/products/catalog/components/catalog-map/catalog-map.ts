@@ -6,26 +6,28 @@ import * as L from 'leaflet';
 
 @Component({
   selector: 'app-catalog-map',
-  imports: [CategoryIconPipe],
+  imports: [],
   templateUrl: './catalog-map.html',
   styleUrl: './catalog-map.scss',
 })
 export class CatalogMap {
   products = input.required<Product[]>();
-  selectedCategory = signal<string>('all');
-private categoryIconPipe = inject(CategoryIconPipe);
+
+  //selectedCategory = signal<string>('all');
+  private categoryIconPipe = inject(CategoryIconPipe);
+
   // Extrae categorías únicas de los productos para el filtro
-  categories = computed(() =>
-    [...new Set(this.products().map(p => p.category.name))]
-  );
+  //categories = computed(() =>
+  // [...new Set(this.products().map(p => p.category.name))]
+  //);
 
   // Filtra productos basándose en la señal del select
-  filteredProducts = computed(() => {
+  /*filteredProducts = computed(() => {
     const category = this.selectedCategory();
     return category === 'all'
       ? this.products()
       : this.products().filter(p => p.category.name === category);
-  });
+  });*/
 
   mapContainer = viewChild.required<ElementRef>('mapContainer');
   private map?: L.Map;
@@ -45,12 +47,12 @@ private categoryIconPipe = inject(CategoryIconPipe);
     });
 
     effect(() => {
-      const currentProducts = this.filteredProducts();
+     // const currentProducts = this.products();
       if (!this.map) return;
 
       this.markerGroup.clearLayers();
 
-      currentProducts.forEach(product => {
+      this.products().forEach(product => {
         // Convertimos string a number para Leaflet
         const lat = parseFloat(product.latitude);
         const lng = parseFloat(product.longitude);
@@ -71,15 +73,11 @@ private categoryIconPipe = inject(CategoryIconPipe);
 <span class="text-xs">A 1.2 km de ti</span>
 </div>
 <button onclick="window.location.href='/product/${product.id}'"  class="mt-3 w-full py-2 bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-lg text-xs font-bold transition-all">Ver detalles</button>
-</div>
-</div>
-
-           `);
+</div></div>`);
 
           this.markerGroup.addLayer(marker);
         }
       });
-
       if (this.markerGroup.getLayers().length > 0) {
         this.map.fitBounds(this.markerGroup.getBounds(), { padding: [30, 30] });
       }
@@ -87,16 +85,7 @@ private categoryIconPipe = inject(CategoryIconPipe);
   }
 
   private createCustomIcon(categoryName: string): L.DivIcon {
-    // Definir un color o emoji por categoría
-    const config: Record<string, string> = {
-      'Hogar': '🏠',
-      'Jardin': '🌳',
-      'Electrónica': '🔌',
-      'Muebles': '🪑',
-      'Ropa': '👕',
-      'Libros': '📚'
-    };
- const iconName = this.categoryIconPipe.transform(categoryName);
+    const iconName = this.categoryIconPipe.transform(categoryName);
     return L.divIcon({
       html: `<div class="absolute bottom-1/4 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
 <div class="relative flex flex-col items-center">

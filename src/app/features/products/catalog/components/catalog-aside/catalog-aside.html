@@ -2,30 +2,15 @@
     <div>
         <h3 class="text-sm font-bold uppercase tracking-wider text-primary/60 mb-4">Categorías</h3>
         <nav class="space-y-1">
-            <a class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 text-primary font-medium" href="#">
-                <span class="material-symbols-outlined text-xl">chair</span>
-                <span class="text-sm">Muebles</span>
-            </a>
-            <a class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 transition-colors"
-                href="#">
-                <span class="material-symbols-outlined text-xl">checkroom</span>
-                <span class="text-sm">Ropa</span>
-            </a>
-            <a class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 transition-colors"
-                href="#">
-                <span class="material-symbols-outlined text-xl">devices</span>
-                <span class="text-sm">Electrónica</span>
-            </a>
-            <a class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 transition-colors"
-                href="#">
-                <span class="material-symbols-outlined text-xl">book</span>
-                <span class="text-sm">Libros</span>
-            </a>
-            <a class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 transition-colors"
-                href="#">
-                <span class="material-symbols-outlined text-xl">toys</span>
-                <span class="text-sm">Otros</span>
-            </a>
+                  @for (cat of categories(); track cat) {
+        <button (click)="categoryChange.emit(cat)"
+          [class]="currentCategory() === cat ? 'bg-primary/10  text-primary' : ' text-slate-600 dark:text-slate-400 hover:bg-primary/5 transition-colors'"
+          class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all font-medium">
+          <span class="material-symbols-outlined">{{ cat | categoryIcon }}</span>
+          {{ cat }}
+        </button>
+      }
+           
         </nav>
     </div>
     <div>
