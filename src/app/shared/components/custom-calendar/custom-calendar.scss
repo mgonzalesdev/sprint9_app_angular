@@ -1,0 +1,66 @@
+::ng-deep .fc-theme-standard td, 
+::ng-deep .fc-theme-standard th,
+::ng-deep .fc-scrollgrid {
+  border: none !important;
+}
+
+::ng-deep .fc-col-header-cell {
+  //padding-bottom: 8px !important;
+}
+
+::ng-deep .fc-col-header-cell-cushion {
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  color:  var(--color-neutral-700) !important; 
+  text-decoration: none !important;
+  text-transform: uppercase;
+}
+/* Color primario para S y D (Fines de semana) */
+::ng-deep .fc-day-sat .fc-col-header-cell-cushion,
+::ng-deep .fc-day-sun .fc-col-header-cell-cushion {
+  color: var(--color-primary) !important; 
+}
+
+/* 3. Estilo de los números */
+::ng-deep .fc-daygrid-day-number {
+  font-size: 10px !important;
+  color: var(--color-neutral-700) !important;
+  text-decoration: none !important;
+}
+
+
+/* Días de otros meses (gris suave) */
+::ng-deep .fc-day-other .fc-daygrid-day-number {
+  color: var(--color-neutral-200) !important;
+}
+
+/* 4. El "Círculo" de selección o evento (Día activo) */
+::ng-deep .fc-day-today {
+  background: transparent !important;
+}
+
+::ng-deep .fc-day-today .fc-daygrid-day-frame {
+  /* Usamos tu color primary con opacidad manual */
+  background-color: color-mix(in srgb, var(--color-primary), transparent 80%) !important; 
+  border-radius: 9999px;
+  aspect-ratio: 1 / 1;
+  max-width: 24px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::ng-deep .fc-day-today .fc-daygrid-day-number {
+  color: var(--color-primary) !important;
+  font-weight: 700;
+}
+
+
+/* Ajustar altura de las celdas para que sean cuadradas */
+::ng-deep .fc-daygrid-day-frame {
+  min-height: 30px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

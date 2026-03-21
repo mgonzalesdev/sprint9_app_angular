@@ -84,7 +84,7 @@ export const routes: Routes = [
   { path: '**', redirectTo: 'catalog' }
 ];*/
 export const routes: Routes = [
-  
+
   // 1. DISEÑO PÚBLICO (Layout con Sidebar - Diseño 1 de Stitch)
   {
     path: '',
@@ -92,6 +92,7 @@ export const routes: Routes = [
     children: [
       { path: 'catalog', component: Catalog },
       { path: 'product/:id', component: ProductDetail },
+      { path: 'dashboard', component: Dashboard },
       { path: '', redirectTo: 'catalog', pathMatch: 'full' }
     ]
   },
@@ -102,7 +103,6 @@ export const routes: Routes = [
     component: MainLayout,
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard', component: Dashboard },
       {
         path: 'manage',
         children: [
@@ -115,13 +115,13 @@ export const routes: Routes = [
   },
 
   // 3. DISEÑO DE AUTENTICACIÓN (Sin Navbar/Sidebar)
-  { 
-    path: 'auth', 
+  {
+    path: 'auth',
     component: AuthLayout,
     children: [
       { path: 'login', component: Login },
       { path: 'register', component: Register },
-   //   { path: 'register', component: RegisterComponent }, // Aquí irá tu registro
+      //   { path: 'register', component: RegisterComponent }, // Aquí irá tu registro
     ]
   },
 

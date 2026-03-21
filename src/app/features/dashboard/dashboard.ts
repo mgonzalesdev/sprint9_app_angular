@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { StatsService } from '@core/services/stats';
+import { StatsService } from '@core/services/stats.service';
 import { Chart } from '@shared/components/chart/chart';
 
 @Component({
@@ -15,7 +15,7 @@ export class Dashboard {
   // Signals de datos (API)
   rawPie = toSignal(this.statsService.getPieChartData(), { initialValue: [] as any });
   rawBar = toSignal(this.statsService.getBarChartData(), { initialValue: [] as any });
-  summary = toSignal(this.statsService.getSummary(), { initialValue: { totalProducts: 0, activeProducts: 0 } });
+  summary = toSignal(this.statsService.getSummary(), { initialValue: { totalProducts: 0, activeProducts: 0,totalUsers:0 } });
 
 
   categoryPieData = computed(() => {
@@ -38,9 +38,9 @@ export class Dashboard {
     return {
       labels: stats.map(item => item.month),
       datasets: [{
-        label: 'Nuevos Regalos por Mes',
+        label: 'Regalos por Mes',
         data: stats.map(item => Number(item.total)),
-        backgroundColor: '#42A5F5'
+        backgroundColor:'#2d5927'
       }]
     };
   });

@@ -1,5 +1,183 @@
-<div class="dashboard-wrapper">
+<div class="p-8 space-y-8">
+  <!-- Hero Title -->
+  <div class="flex flex-col gap-2">
+    <h1 class="text-4xl font-black text-slate-900 dark:text-slate-50">EcoRegalo Impact</h1>
+    <p class="text-slate-500 dark:text-slate-400 max-w-2xl text-lg">Visualiza el cambio positivo que estamos logrando
+      juntos. Métricas en tiempo real de nuestra huella ambiental y social.</p>
+  </div>
+  <!-- Stats Cards Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div
+      class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start justify-between">
+      <div>
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Total Objetos Publicados</p>
+        <h3 class="text-3xl font-bold">{{ summary()!.totalProducts }}</h3>
+        <p class="text-primary text-sm font-semibold mt-2 flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">trending_up</span> +12% este mes
+        </p>
+      </div>
+      <div class="p-3 bg-primary/10 rounded-lg text-primary">
+        <span class="material-symbols-outlined">featured_seasonal_and_gifts</span>
+      </div>
+    </div>
+    <div
+      class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start justify-between">
+      <div>
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Usuarios Activos</p>
+        <h3 class="text-3xl font-bold">{{summary()!.totalUsers}}</h3>
+        <p class="text-primary text-sm font-semibold mt-2 flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">trending_up</span> +5.2% esta semana
+        </p>
+      </div>
+      <div class="p-3 bg-primary/10 rounded-lg text-primary">
+        <span class="material-symbols-outlined">group</span>
+      </div>
+    </div>
+    <div
+      class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start justify-between">
+      <div>
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Artículos Disponibles</p>
+        <h3 class="text-3xl font-bold">{{summary()!.activeProducts}}</h3>
+        <p class="text-primary text-sm font-semibold mt-2 flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">trending_up</span> +18% vs mes anterior
+        </p>
+      </div>
+      <div class="p-3 bg-primary/10 rounded-lg text-primary">
+        <span class="material-symbols-outlined">delete_sweep</span>
+      </div>
+    </div>
+  </div>
+  <!-- Detailed Visualizations -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Bar Chart: Objetos por Categoría -->
+    <div
+      class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full">
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h4 class="font-bold text-lg">Objetos por Categoría</h4>
+          <p class="text-slate-500 text-sm">Distribución de regalos por tipo</p>
+        </div>
+        <span class="material-symbols-outlined text-primary-800">category</span>
+      </div>
+      <div class="flex-1 flex justify-center h-64 px-2">
+        @if (rawPie().length > 0) {
+        <app-chart type="pie" [data]="categoryPieData()" />
+        } @else {
+        <div class="placeholder">Analizando categorías...</div>
+        }
 
+      </div>
+    </div>
+    <!-- Circular Gauge & Line Trend -->
+    <div class="space-y-8">
+      <!-- Gauge: CO2 Ahorrado -->
+      <div
+        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+        <div class="space-y-1">
+          <h4 class="font-bold text-lg">CO2 Ahorrado</h4>
+          <p class="text-slate-500 text-sm">Objetivo mensual: 5,000 kg</p>
+          <div class="pt-4">
+            <span class="text-3xl font-black text-primary">3,420</span>
+            <span class="text-slate-400 text-lg ml-1">kg</span>
+          </div>
+        </div>
+        <div class="relative flex items-center justify-center">
+          <svg class="w-32 h-32 transform -rotate-90">
+            <circle class="text-slate-100 dark:text-slate-800" cx="64" cy="64" fill="transparent" r="54"
+              stroke="currentColor" stroke-width="12"></circle>
+            <circle class="text-primary" cx="64" cy="64" fill="transparent" r="54" stroke="currentColor"
+              stroke-dasharray="339.29" stroke-dashoffset="108.57" stroke-width="12"></circle>
+          </svg>
+          <span class="absolute text-xl font-bold">68%</span>
+        </div>
+      </div>
+      <!-- Small Line Chart: Crecimiento Comunidad -->
+      <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="flex justify-between items-center mb-6">
+          <h4 class="font-bold text-lg">Crecimiento de la Comunidad</h4>
+          <select
+            class="bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400 focus:ring-primary">
+            <option>Últimos 6 meses</option>
+            <option>Último año</option>
+          </select>
+        </div>
+        <div class="relative w-full  flex items-end gap-1 justify-center">
+          <!-- Visual representation of line chart nodes -->
+          @if (rawBar().length > 0) {
+          <app-chart type="bar" [data]="trendsBarData()" />
+          } @else {
+          <div class="placeholder">Calculando tendencias...</div>
+          }
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Impact Map / Activity -->
+  <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h4 class="font-bold text-lg">Actividad en Tiempo Real</h4>
+        <p class="text-slate-500 text-sm">Ubicación de los últimos intercambios exitosos</p>
+      </div>
+      <button class="text-primary text-sm font-bold flex items-center gap-1">Ver mapa completo <span
+          class="material-symbols-outlined text-sm">open_in_new</span></button>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 aspect-video bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden relative">
+        <img class="w-full h-full object-cover opacity-50 grayscale contrast-125"
+          data-alt="Mapa abstracto de actividad urbana" data-location="Madrid"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuByQ02SDzOETOiwl6ldnXR6Jw-R93_S-0BnW9TOlBg3InhvNWFfVVzLcS6-isV87dsovmcZHut-lc1GKHqQlVkUSJIjTlTiKaDOyNrv2Kfa06EJShPRE7iqGfCgtkIRIU4-q3_s4Lka2H7Dg3d_wlwW_-2o2Ur7FV38NofXPbCqWoqiXiUgArN3pq8uqPOQSuF9mYkhSvZTrodnOtFh8q2ZE24TPxqaEi6ZpMQuKjh8R8Ufdjb_nCvTnTRLrMSwYPtYBMlPexc6hLE" />
+        <div
+          class="absolute top-1/4 left-1/3 w-4 h-4 bg-primary rounded-full animate-pulse border-2 border-white shadow-lg">
+        </div>
+        <div
+          class="absolute top-1/2 right-1/4 w-4 h-4 bg-primary rounded-full animate-pulse border-2 border-white shadow-lg">
+        </div>
+        <div
+          class="absolute bottom-1/3 left-1/2 w-4 h-4 bg-primary rounded-full animate-pulse border-2 border-white shadow-lg">
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h5 class="text-sm font-bold uppercase text-slate-400 tracking-wider">Recientes</h5>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold truncate">Silla de escritorio regalada</p>
+              <p class="text-xs text-slate-500">Madrid, hace 5 min</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold truncate">Colección de libros donada</p>
+              <p class="text-xs text-slate-500">Barcelona, hace 12 min</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold truncate">Bicicleta infantil en camino</p>
+              <p class="text-xs text-slate-500">Valencia, hace 24 min</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="dashboard-wrapper">
   <div class="summary-grid">
     @if (summary()) {
     <div class="card highlight">
@@ -14,9 +192,7 @@
     <div class="card loading">Cargando resumen...</div>
     }
   </div>
-
   <div class="charts-layout">
-
     <div class="chart-container">
       <h4>Impacto por Categoría</h4>
       @if (rawPie().length > 0) {
@@ -25,8 +201,6 @@
       <div class="placeholder">Analizando categorías...</div>
       }
     </div>
-
-
     <div class="chart-container">
       <h4>Crecimiento de Regalos (6 meses)</h4>
       @if (rawBar().length > 0) {
@@ -35,6 +209,5 @@
       <div class="placeholder">Calculando tendencias...</div>
       }
     </div>
-
   </div>
 </div>

@@ -1,12 +1,12 @@
 <div
       class="group overflow-hidden rounded-xl border border-primary/10 bg-white dark:bg-background-dark/40 shadow-sm hover:shadow-md transition-all">
       <div class="relative h-48 w-full overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  data-alt="Vintage wooden chair image"
-                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA0-ZzjM7K63RWVqdWnd4EqdJ8TTCKn0FjkbuGe0TrZZQ3976nSLPfbxXT9QUf1xYLWYg8q6l0RvjAh_U9h4lU244CGJlLVLIBizg93ewWgssjHchCl59_RuPEl3AkJN9NrGKNKGzJ_Db-EtHuCOJqN5cVrDE_ad12wgstvQzLeuoDEQuPFupkUFjF3Ggmf7goNYQDDXpibX2OmrAhWIPqUkQGSZPpeB593d7D729AVdcN_HUtDxO-yDiJWEF6tML_PWshLHSMonc8')">
+
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  [style.background-image]="'url(' + (product().image || '/placeholder.jpg') + ')'">
             </div>
-            <div
-                  class="absolute top-3 right-3 rounded-full bg-emerald-500 px-2.5 py-1 text-[10px] font-bold text-white uppercase tracking-wide">
+            <div  [class]="product().status.name | statusColor"
+                  class="absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-bold text-white uppercase tracking-wide">
                   {{ product().status.name }}</div>
             <div
                   class="absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-white/90 dark:bg-slate-900/90 px-2 py-1 text-[10px] font-medium text-slate-700 dark:text-slate-200 backdrop-blur-sm">
@@ -17,12 +17,14 @@
       <div class="p-4">
             <div class="flex items-center justify-between mb-1">
                   <span class="flex items-center gap-1 text-[10px] font-bold text-primary uppercase">
-                        <span class="material-symbols-outlined text-xs"> {{ product().category.name | categoryIcon }}</span> {{ product().category.name }}
+                        <span class="material-symbols-outlined text-xs"> {{ product().category.name | categoryIcon
+                              }}</span> {{ product().category.name }}
                   </span>
                   <span class="text-[10px] font-medium text-slate-400">Hace 2h</span>
             </div>
             <h3 class="text-base font-bold text-slate-900 dark:text-slate-100">{{ product().name }}</h3>
-            <p class="mt-1 text-sm text-slate-500">Estado: <span class="text-primary font-medium">{{ product().condition.name }}</span></p>
+            <p class="mt-1 text-sm text-slate-500">Estado: <span class="text-primary font-medium">{{
+                        product().condition.name }}</span></p>
             <button [routerLink]="['/product', product().id]"
                   class="mt-4 w-full rounded-lg border border-primary text-primary py-2 text-sm font-bold hover:bg-primary hover:text-white transition-colors">
                   Ver Detalles

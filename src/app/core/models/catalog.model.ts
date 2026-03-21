@@ -17,9 +17,11 @@ export interface Product {
     publicationDate: Date;
     latitude: string;
     longitude: string;
+    image:string;
     category: Category;
     status: Status;
-    condition: Condition
+    condition: Condition,
+    userId:number
 }
 
 //Stats data
@@ -38,4 +40,5 @@ export interface TrendStat {
 export interface SummaryStats {
   totalProducts: number;
   activeProducts: number;
+  totalUsers:number
 }

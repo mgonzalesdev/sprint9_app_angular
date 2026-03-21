@@ -3,7 +3,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 import { Product } from '@core/models/catalog.model';
-import { ProductService } from '@core/services/product';
+import { ProductService } from '@core/services/product.service';
 import { CustomCalendar } from '@shared/components/custom-calendar/custom-calendar';
 import { ProductAdminRow } from '@shared/components/product-admin-row/product-admin-row';
 

@@ -1,7 +1,7 @@
 import { Component, computed, inject, input, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { CatalogService } from '@core/services/catalog';
-import { ProductService } from '@core/services/product';
+import { CatalogService } from '@core/services/catalog.service';
+import { ProductService } from '@core/services/product.service';
 import { CategoryIconPipe } from '@shared/pipes/category-icon-pipe';
 
 @Component({

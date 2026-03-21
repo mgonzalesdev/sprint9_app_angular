@@ -19,11 +19,20 @@ export class CustomCalendar {
   newEventTitle = '';
   selectedDateStr = '';
   calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
-
+    plugins: [dayGridPlugin, interactionPlugin],
+    dayHeaderFormat: { weekday: 'narrow' },
     locale: esLocale,
+    headerToolbar: {
+    right: 'prev,next today',
+    center: '',
+    left: 'title'
+  },
     firstDay: 1,
+  height: 'auto',
+  contentHeight: 'auto',
+  fixedWeekCount: false,
+  showNonCurrentDates: true,
     dateClick: (arg) => this.openModal(arg.dateStr),
     events: [{ title: 'Evento Registrado', start: new Date() }]//leer eventos guardados desde la api
   };
@@ -31,6 +40,8 @@ export class CustomCalendar {
     this.selectedDateStr = date;
     this.showModal = true;
   }
+
+
 
   saveEvent() { // Acá se debe guardar el evento mediante la api
     if (this.newEventTitle) {

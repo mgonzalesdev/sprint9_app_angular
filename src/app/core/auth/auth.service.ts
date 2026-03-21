@@ -28,7 +28,12 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         // Guardamos el JWT que viene de NestJS  
-        this.saveSession(response.accessToken, response.user);
+        const token = response.access_token;
+        if (token) {
+          this.saveSession(token, response.user);
+        } else {
+          console.error('La API no envió access_token ❌', response);
+        }
       })
     );
   }
@@ -62,8 +67,15 @@ export class AuthService {
   checkStatus() {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    if (!token || !user) return; // No hacemos logout automático aquí para no ser agresivos
-    this._currentUser.set(JSON.parse(user));
+    //if (!token || !user) return; // No hacemos logout automático aquí para no ser agresivos
+    //this._currentUser.set(JSON.parse(user));
+    if (token && user) {
+      try {
+        this._currentUser.set(JSON.parse(user));
+      } catch (e) {
+        this.logout(); // Si el JSON está corrupto, limpiamos
+      }
+    }
   }
 
 

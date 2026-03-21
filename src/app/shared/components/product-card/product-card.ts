@@ -3,10 +3,11 @@ import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '@core/models/catalog.model';
 import { CategoryIconPipe } from '@shared/pipes/category-icon-pipe';
+import { StatusColorPipe } from '@shared/pipes/status-color-pipe';
 
 @Component({
   selector: 'app-product-card',
-  imports: [DatePipe,RouterLink,CategoryIconPipe],
+  imports: [DatePipe,RouterLink,CategoryIconPipe,StatusColorPipe],
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss',
 })
