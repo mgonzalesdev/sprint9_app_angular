@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
+import { AiService } from '@core/services/ai.service';
 import { CatalogService } from '@core/services/catalog.service';
 import { ProductService } from '@core/services/product.service';
 import { Map } from '@shared/components/map/map';
@@ -18,6 +19,7 @@ export class ProductForm implements OnInit {
   private fb = inject(FormBuilder);
   private productService = inject(ProductService);
   private catalogService = inject(CatalogService);
+  private aiScanner = inject(AiService);
   private router = inject(Router);
   private authService = inject(AuthService);
 
@@ -28,6 +30,8 @@ export class ProductForm implements OnInit {
 
   selectedFile = signal<File | null>(null);
   preview = signal<string | null>(null);
+  isAiLoading = signal(false);
+  ecoImpactInfo = signal<string | null>(null);
 
   productForm = this.fb.group({
     name: ['', [Validators.required]],
@@ -35,7 +39,7 @@ export class ProductForm implements OnInit {
     categoryId: [null, [Validators.required]],
     statusId: [null, [Validators.required]],
     conditionId: [null, [Validators.required]],
-    userId: [null as number | null],// Id de Usuario authService.currentUser()?.name
+    userId: [null as number | null],
     latitude: [0],
     longitude: [0]
   });
@@ -43,7 +47,15 @@ export class ProductForm implements OnInit {
   ngOnInit() {
     if (this.id()) {
       this.productService.getProductById(this.id()!).subscribe((prod: any) => {
-        // console.log(prod);
+        const currentUser = this.authService.currentUser();
+        if (prod.user.id !== currentUser?.id) {
+          alert('No tienes permiso para editar este objeto 🚫');
+          this.router.navigate(['/manage/list']);
+          return;
+        }
+        if (prod.image) {
+          this.preview.set(prod.image);
+        }
         const formData = {
           ...prod,
           categoryId: prod.category?.id || prod.categoryId,
@@ -57,12 +69,6 @@ export class ProductForm implements OnInit {
             lat: Number(prod.latitude),
             lng: Number(prod.longitude)
           });
-        }
-        const currentUser = this.authService.currentUser();
-        if (prod.user.id !== currentUser?.id) {
-          alert('No tienes permiso para editar este objeto 🚫');
-          this.router.navigate(['/manage/list']);
-          return;
         }
         this.productForm.patchValue(formData);
       });
@@ -108,40 +114,64 @@ export class ProductForm implements OnInit {
     });
   }
 
-  /*save() {
-    if (this.productForm.invalid) return;
-    const data = this.productForm.value;
-    console.log('📦 Enviando a la API:', data);
-    const request = this.id()
-      ? this.productService.update(this.id()!, data)
-      : this.productService.create(data);
-
-    request.subscribe({
-      next: () => this.router.navigate(['/catalog']),
-      error: (err) => console.error('❌ Error API:', err)
-    });
-  }*/
   save() {
     if (this.productForm.invalid) {
-      this.productForm.markAllAsTouched(); // 👈 Esto "ilumina" los errores en el HTML
-      console.warn('⚠️ Formulario incompleto o inválido');
+      this.productForm.markAllAsTouched(); // muestra los errores en el HTML
       return;
     }
     const data = this.productForm.getRawValue();
-    const image = this.selectedFile(); // 👈 El Signal donde guardaste el archivo del <input type="file">
-
-    console.log('📦 Enviando FormData con imagen:', data);
-
+    const image = this.selectedFile(); //  Signal donde se guardo el archivo del <input type="file">
+    
     const request = this.id()
-      ? this.productService.update(this.id()!, data) // Para update podrías necesitar lógica similar
-      : this.productService.create(data, image);   // 👈 Pasamos los datos y la imagen
+      ? this.productService.update(this.id()!, data)
+      : this.productService.create(data, image);
 
     request.subscribe({
       next: () => {
-        console.log('✅ Producto creado con éxito');
         this.router.navigate(['/catalog']);
       },
-      error: (err) => console.error('❌ Error API:', err)
+      error: (err) => console.error(' Error API:', err)
     });
   }
+
+  analyzeWithAi() {
+    const file = this.selectedFile();
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Esta foto es muy grande. Intenta con una más pequeña. 📸');
+      return;
+    }
+    this.isAiLoading.set(true);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
+
+      this.aiScanner.analyzeImage(base64).subscribe({
+        next: (res) => {
+          const foundCategory = this.categories().find(
+            (c: any) => c.name.toLowerCase() === res.category.toLowerCase()
+          );
+
+          this.productForm.patchValue({
+            name: res.name,
+            description: res.description,
+            categoryId: foundCategory ? foundCategory.id : this.productForm.value.categoryId
+          });
+          this.ecoImpactInfo.set(res.ecoImpact);
+          this.isAiLoading.set(false);
+        },
+        error: (err) => {
+          console.error('Error IA:', err);
+          this.isAiLoading.set(false);
+        }
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+  clearAiData() {
+    this.ecoImpactInfo.set(null);
+    this.productForm.patchValue({ name: '', description: '' });
+  }
+
 }

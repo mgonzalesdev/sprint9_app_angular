@@ -29,14 +29,11 @@ export class Register {
   }
 
   onRegister() {
-    /*if (this.registerForm.valid) {
-      console.log('Usuario registrado:', this.registerForm.value);
-    }*/
     if (this.registerForm.invalid) return;
 
     this.authService.register(this.registerForm.value).subscribe({
       next: () => {
-        // Redirigir al dashboard o al login tras el éxito
+        // Redirigir al listado de sus articulos tras el éxito
         this.router.navigate(['/manage/list']);
       },
       error: (err) => {

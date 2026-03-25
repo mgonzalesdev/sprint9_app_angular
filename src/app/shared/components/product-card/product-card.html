@@ -5,14 +5,14 @@
             <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                   [style.background-image]="'url(' + (product().image || '/placeholder.jpg') + ')'">
             </div>
-            <div  [class]="product().status.name | statusColor"
+            <div [class]="product().status.name | statusColor"
                   class="absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-bold text-white uppercase tracking-wide">
                   {{ product().status.name }}</div>
-            <div
+            <!--<div
                   class="absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-white/90 dark:bg-slate-900/90 px-2 py-1 text-[10px] font-medium text-slate-700 dark:text-slate-200 backdrop-blur-sm">
                   <span class="material-symbols-outlined text-sm">location_on</span>
                   Chamberí, Madrid
-            </div>
+            </div>-->
       </div>
       <div class="p-4">
             <div class="flex items-center justify-between mb-1">
@@ -20,7 +20,7 @@
                         <span class="material-symbols-outlined text-xs"> {{ product().category.name | categoryIcon
                               }}</span> {{ product().category.name }}
                   </span>
-                  <span class="text-[10px] font-medium text-slate-400">Hace 2h</span>
+                  <span class="text-[10px] font-medium text-slate-400">{{product().publicationDate | date:"EEEE, d 'de' MMMM"}}</span>
             </div>
             <h3 class="text-base font-bold text-slate-900 dark:text-slate-100">{{ product().name }}</h3>
             <p class="mt-1 text-sm text-slate-500">Estado: <span class="text-primary font-medium">{{

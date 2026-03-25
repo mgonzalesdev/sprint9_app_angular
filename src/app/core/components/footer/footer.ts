@@ -11,11 +11,11 @@ import { AuthService } from '@core/auth/auth.service';
 export class Footer {
   private authService = inject(AuthService);
   private router = inject(Router);
+  
   handleRegalar() {
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['/manage/new']);
     } else {
-      // Opcional: Guardar la ruta actual para volver después del login
       this.router.navigate(['/auth/login']);
     }
   }

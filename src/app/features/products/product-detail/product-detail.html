@@ -1,16 +1,17 @@
 <main class="max-w-7xl mx-auto px-4 py-8">
   <!-- Main Layout: Bento Style Image Gallery & Sidebar -->
+  @if (product(); as item) {
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
     <!-- Left Column: Product Visuals & Info -->
     <div class="lg:col-span-8 space-y-8">
-     @if (product(); as item) {
+
       <!-- Bento Image Gallery -->
-      <section class="grid grid-cols-4 grid-rows-2 gap-3 h-[500px]">
+      <section class="grid   gap-3 h-[500px]">
         <div class="col-span-3 row-span-2 relative overflow-hidden rounded-xl group">
           <img alt="Main product view"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             data-alt="Modern cognac leather sofa in bright minimalist living room"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8ZMKnyxc5CFi8vX0wAX2ABGCt1ujYyAxWZI2Dr_GJsWKmmpapT0dl_SFuXzkMd9CUQVknLZZmV9Hy9uyCKpApkELpRwet_oq5lzJwx0JF4wb3rT4nqgf9Ce2Y6DmQFoLqsfp6Gomu4BNoZEel8Xg9n4JhOV3qoA7Xomt2Izful8ni34889laHtR46oKcTd6XoHbyTK8LzUml3ekw5iXKri8G9jTT97qme_HRB9g3MmrjsBYbwHT3tMKmYbGBwnVyyUdGWNK5HkJc" />
+            [src]="item.image || '/placeholder.jpg'" />
           <div class="absolute top-4 left-4 flex gap-2">
             <span
               class="px-3 py-1 bg-white/90 backdrop-blur shadow-sm rounded-full text-xs font-bold text-primary-700 uppercase tracking-wider">{{item.status.name}}</span>
@@ -18,21 +19,7 @@
               class="px-3 py-1 bg-neutral-900/80 backdrop-blur shadow-sm rounded-full text-xs font-bold text-white uppercase tracking-wider">{{item.category.name}}</span>
           </div>
         </div>
-        <div class="col-span-1 row-span-1 overflow-hidden rounded-xl">
-          <img alt="Detail view 1" class="w-full h-full object-cover hover:opacity-90 cursor-pointer transition-opacity"
-            data-alt="Close up detail of vintage leather stitching"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuIrTt7I5YXOzBIOiYIGFLJt_3bIFzhEpB-6aq2BiaKCLkZkJ_Dh1vOMPB0zBvoAbKQgy6hjzDyRha5o8NepnNUk2OZsBY3kWLp9PYRMoFFGTK9Gdv5Vx7mIaah9NZJ9V8kr9Sq44DiUqFFZc65AxY8IZxJ__B7foHPruArQ2d0zV3vPXVcpQoWLKqeX17Bk0ZGVvsDftTNO9NabFNlf9vk0R-BkReQmdesnBG4BBOJZo1DD_n_VhhVGwglXkvwBmMPpLKKiTlOhw" />
-        </div>
-        <div class="col-span-1 row-span-1 relative overflow-hidden rounded-xl">
-          <img alt="Detail view 2" class="w-full h-full object-cover hover:opacity-90 cursor-pointer transition-opacity"
-            data-alt="Side profile of luxury leather couch"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsh3ctB-NIWF2QMIE0LGvs7HR8qEXQFqU2vkKq8QICkBVlwYeNCgPbmqJq92a9evUfRM8RuF0kf3gIJVxeGcBvsDO0a6O1OckEVR68dmw7n5XltxY82BI7d5PGbhxXs9ejNx-g6AgdDfe_Q4Od1vrvEBvZb8bLwB_F-5Lfl5vLRxs0MmFtK95RZHnkrOIfK1Ybsv-8Z_UNkcicg-35dqZ623luFDkehYSEjZ6_xyfwd5bZe7IuuGxSba3fDklP1KzQduiGylCS6lo" />
-          <div
-            class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white cursor-pointer hover:bg-black/50 transition-colors">
-            <span class="material-symbols-outlined text-3xl">grid_view</span>
-            <span class="text-xs font-bold mt-1">+12 Fotos</span>
-          </div>
-        </div>
+
       </section>
       <!-- Product Details -->
       <div class="bg-white rounded-2xl p-8 border border-neutral-200 shadow-sm">
@@ -46,7 +33,7 @@
               </div>
               <div class="flex items-center gap-1">
                 <span class="material-symbols-outlined text-sm">schedule</span>
-                <span class="text-sm">Publicado hace 2 días</span>
+                <span class="text-sm">Publicado {{item.publicationDate | date:"EEEE, d 'de' MMMM"}}</span>
               </div>
             </div>
           </div>
@@ -60,18 +47,7 @@
             <span class="block text-[10px] uppercase font-bold text-neutral-400 mb-1">Estado</span>
             <span class="text-sm font-semibold text-neutral-700">{{item.condition.name}}</span>
           </div>
-          <div class="bg-neutral-50 p-3 rounded-lg border border-neutral-100">
-            <span class="block text-[10px] uppercase font-bold text-neutral-400 mb-1">Color</span>
-            <span class="text-sm font-semibold text-neutral-700">Marrón Cognac</span>
-          </div>
-          <div class="bg-neutral-50 p-3 rounded-lg border border-neutral-100">
-            <span class="block text-[10px] uppercase font-bold text-neutral-400 mb-1">Material</span>
-            <span class="text-sm font-semibold text-neutral-700">Cuero Genuino</span>
-          </div>
-          <div class="bg-neutral-50 p-3 rounded-lg border border-neutral-100">
-            <span class="block text-[10px] uppercase font-bold text-neutral-400 mb-1">Dimensiones</span>
-            <span class="text-sm font-semibold text-neutral-700">210 x 95 x 85 cm</span>
-          </div>
+
         </div>
         <div class="prose prose-sm max-w-none text-neutral-600 leading-relaxed">
           <p>{{item.description}}</p>
@@ -99,44 +75,16 @@
         </div>
         <div class="p-4 bg-neutral-50">
           <p class="text-xs text-neutral-500 text-center italic">Ubicación aproximada por privacidad del donante</p>
+
         </div>
       </div>
-    }
+
     </div>
-  
+
     <!-- Right Column: Sidebar -->
     <div class="lg:col-span-4 space-y-6">
       <!-- Donor Info Card -->
-      <div class="bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-4">Donado por</h3>
-        <div class="flex items-center gap-4 mb-6">
-          <img alt="Donor avatar" class="w-14 h-14 rounded-full object-cover border-2 border-primary-100"
-            data-alt="Portrait of a smiling woman with glasses"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRpVcWGX5CgjbNg55hKE4Zuh4DWDOuxPpyPVhaWfW6UOjQ-MiS6FbbzWBV5cGpk7bKsXcyIwH6wI1whvT_Y-BNhku6UcASYhEoH6kLoNAH23WYmP1VK76T_7a0NaeQ2lVZXPLnFODeoXrYD3avI4Yp4RgGki9H_BTIkTnJaQNDDB_-WHRgGEvrD-WFavrWOdMjHjIVE1cM6hy-EgNs6rl5xpvqyPbOBXhF2lkz8Zn62B7nrKAa3SlAyAw_ExKDikscnI43PnPp4co" />
-          <div>
-            <h4 class="font-bold text-neutral-900">Elena Martínez</h4>
-            <div class="flex items-center gap-1 text-primary-600 text-xs font-medium">
-              <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
-              <span>Donante Verificado</span>
-            </div>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 mb-6">
-          <div class="text-center p-3 bg-neutral-50 rounded-xl border border-neutral-100">
-            <div class="text-xl font-bold text-neutral-900">24</div>
-            <div class="text-[10px] uppercase font-bold text-neutral-400">Objetos</div>
-          </div>
-          <div class="text-center p-3 bg-neutral-50 rounded-xl border border-neutral-100">
-            <div class="text-xl font-bold text-neutral-900">4.9</div>
-            <div class="text-[10px] uppercase font-bold text-neutral-400">Puntuación</div>
-          </div>
-        </div>
-        <button
-          class="w-full py-3 border-2 border-primary-600 text-primary-700 font-bold rounded-xl hover:bg-primary-50 transition-colors flex items-center justify-center gap-2">
-          <span class="material-symbols-outlined text-lg">chat_bubble</span>
-          Enviar Mensaje
-        </button>
-      </div>
+      <app-user-card [user]="item.user"></app-user-card>
 
       <!-- Environmental Impact Card -->
       <div
@@ -145,7 +93,7 @@
           <span class="material-symbols-outlined text-4xl opacity-50 mb-4"
             style="font-variation-settings: 'FILL' 1;">eco</span>
           <h4 class="font-headline font-bold text-lg mb-1">Impacto Ambiental</h4>
-          <p class="text-primary-100 text-sm mb-4">Dando una segunda vida a este sofá evitas la emisión de 45kg de CO2.
+          <p class="text-primary-100 text-sm mb-4">Dando una segunda vida a artículo evitas la emisión de CO2.
           </p>
           <div class="h-1.5 w-full bg-white/20 rounded-full">
             <div class="h-full w-3/4 bg-white rounded-full"></div>
@@ -155,5 +103,6 @@
       </div>
     </div>
   </div>
+  }
 </main>
-<pre>{{ product() | json }}</pre>
+<!--<pre>{{ product() | json }}</pre>-->

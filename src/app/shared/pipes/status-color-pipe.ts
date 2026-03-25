@@ -10,7 +10,7 @@ export class StatusColorPipe implements PipeTransform {
     const s = status?.toLowerCase();
 
     if (s === 'disponible') {
-      return 'bg-emerald-500 text-emerald-700 bg-primary border-emerald-200 hover:bg-primary-600';
+      return 'bg-emerald-500 text-white bg-primary border-primary-600 hover:bg-primary-600';
     }
     if (s === 'reservado') {
       return 'bg-amber-500 text-amber-700 border-amber-200 hover:bg-amber-200';

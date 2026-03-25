@@ -17,7 +17,6 @@ export class CatalogAside {
   categoryChange = output<string>();
   proximityChange = output<number>();
 
-  //categories = ['Todos', 'Ropa', 'Hogar', 'Juguetes', 'Tecnología'];
   categories_data = toSignal(this.catalogService.getCategories(), { initialValue: [] });
   categories = computed(() => ['Todos', ...this.categories_data().map(p => p.name)]);
   

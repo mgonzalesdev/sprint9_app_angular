@@ -17,7 +17,6 @@ export class ProductAdminRow {
   onDelete = output<number>();
 
   onDeleteClick() {
-    // Para acceder al valor de un input signal se usan paréntesis ()
     this.onDelete.emit(this.product().id);
   }
 

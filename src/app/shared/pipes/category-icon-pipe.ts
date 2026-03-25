@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform ,Injectable } from '@angular/core';
 @Injectable({
-  providedIn: 'root' // <-- Esto hace que se pueda inyectar en cualquier lugar
+  providedIn: 'root' // <-- Esto para que se pueda inyectar en cualquier lugar
 })
 @Pipe({
   name: 'categoryIcon',

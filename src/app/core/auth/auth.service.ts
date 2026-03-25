@@ -12,13 +12,10 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/auth';
 
   // Signal para el estado del usuario
-  //private _currentUser = signal<any | null>(null);
   private _currentUser = signal<any | null>(JSON.parse(localStorage.getItem('user') || 'null'));
 
-  // Selectores públicos
   currentUser = computed(() => this._currentUser());
   isAuthenticated = computed(() => !!this._currentUser());
-  //isAuthenticated = computed(() => { return !!this._currentUser() || !!localStorage.getItem('token'); });
 
   constructor() {
     this.checkStatus();
@@ -27,22 +24,20 @@ export class AuthService {
   login(credentials: any) {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
-        // Guardamos el JWT que viene de NestJS  
+        // Guardamos el JWT  
         const token = response.access_token;
         if (token) {
           this.saveSession(token, response.user);
         } else {
-          console.error('La API no envió access_token ❌', response);
+          console.error('La API no envió access_token', response);
         }
       })
     );
   }
 
   register(userData: any) {
-    // URL de tu endpoint de registro en NestJS
     return this.http.post<any>(`${this.apiUrl}/register`, userData).pipe(
       tap(response => {
-        // Opcional: Si tu API loguea automáticamente al registrar, guarda el token
         const token = response.access_token || response.accessToken;
         if (token) {
           this.saveSession(token, response.user);
@@ -63,12 +58,10 @@ export class AuthService {
     this.router.navigate(['/catalog']);
   }
 
-  // Método para recuperar sesión al recargar la página (Faltaría un endpoint /auth/me en Nest)
   checkStatus() {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    //if (!token || !user) return; // No hacemos logout automático aquí para no ser agresivos
-    //this._currentUser.set(JSON.parse(user));
+
     if (token && user) {
       try {
         this._currentUser.set(JSON.parse(user));

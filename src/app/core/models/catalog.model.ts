@@ -10,6 +10,13 @@ export interface Condition {
     id: number;
     name: string;
 }
+export interface User {
+    id: number,
+    name: string,
+    email: string,
+    createdAt: string,
+    role: string
+}
 export interface Product {
     id: number;
     name: string;
@@ -20,8 +27,8 @@ export interface Product {
     image:string;
     category: Category;
     status: Status;
-    condition: Condition,
-    userId:number
+    condition: Condition;
+    user:User
 }
 
 //Stats data

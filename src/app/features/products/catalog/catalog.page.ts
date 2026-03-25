@@ -19,12 +19,7 @@ export class Catalog {
   proximity = signal<number>(15);
 
   allProducts = toSignal(this.productService.getProducts(), { initialValue: [] });
-
-  /*products = computed(() =>
-    this.allProducts().filter(p => p.status.name !== 'Entregado')
-  );*/
-
-    filteredProducts = computed(() => {
+  filteredProducts = computed(() => {
     return this.allProducts().filter(p => {
       const isAvailable = p.status.name !== 'Entregado';
       const matchesCat = this.selectedCategory() === 'Todos' || p.category.name === this.selectedCategory();
@@ -32,7 +27,7 @@ export class Catalog {
     });
   });
 
-  // Handlers para los eventos del Aside
+
   handleCategoryChange(cat: string) {
     this.selectedCategory.set(cat);
   }

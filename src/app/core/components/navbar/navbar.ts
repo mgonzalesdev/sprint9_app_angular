@@ -22,7 +22,7 @@ export class Navbar {
   onLogout() {
     if (confirm('¿Quieres cerrar tu sesión?')) {
       this.authService.logout();
-      this.isMenuOpen.set(false); // Cerramos el menú móvil por si acaso
+      this.isMenuOpen.set(false); 
     }
   }
   handlePublicar() {

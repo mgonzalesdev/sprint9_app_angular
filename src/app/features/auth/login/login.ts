@@ -5,7 +5,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule,RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -27,7 +27,7 @@ export class Login {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
-        console.log('Login exitoso en NestJS ✅');
+        console.log('Login exitoso en NestJS');
         this.router.navigate(['/manage/list']);
       },
       error: (err) => {
