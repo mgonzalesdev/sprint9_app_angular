@@ -2,18 +2,18 @@
     <div>
         <h3 class="text-sm font-bold uppercase tracking-wider text-primary/60 mb-4">Categorías</h3>
         <nav class="space-y-1">
-                  @for (cat of categories(); track cat) {
-        <button (click)="categoryChange.emit(cat)"
-          [class]="currentCategory() === cat ? 'bg-primary/10  text-primary' : ' text-slate-600 dark:text-slate-400 hover:bg-primary/5 transition-colors'"
-          class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all font-medium">
-          <span class="material-symbols-outlined">{{ cat | categoryIcon }}</span>
-          {{ cat }}
-        </button>
-      }
-           
+            @for (cat of categories(); track cat) {
+            <button (click)="categoryChange.emit(cat)"
+                [class]="currentCategory() === cat ? 'bg-primary/10  text-primary' : ' text-slate-600 dark:text-slate-400 hover:bg-primary/5 transition-colors'"
+                class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all font-medium">
+                <span class="material-symbols-outlined">{{ cat | categoryIcon }}</span>
+                {{ cat }}
+            </button>
+            }
+
         </nav>
     </div>
-    <div>
+    <!--<div>
         <div class="flex items-center justify-between mb-4">
             <h3 class="text-sm font-bold uppercase tracking-wider text-primary/60">Proximidad</h3>
             <span class="text-xs font-bold text-primary">15 km</span>
@@ -24,7 +24,7 @@
             <span>1km</span>
             <span>50km+</span>
         </div>
-    </div>
+    </div>-->
     <div class="pt-4">
         <div class="rounded-xl bg-primary/5 p-4 border border-primary/10">
             <p class="text-xs text-primary leading-relaxed">Cada objeto regalado es un paso hacia un futuro más

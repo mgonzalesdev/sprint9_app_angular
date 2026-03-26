@@ -20,4 +20,7 @@ export class CatalogAside {
   categories_data = toSignal(this.catalogService.getCategories(), { initialValue: [] });
   categories = computed(() => ['Todos', ...this.categories_data().map(p => p.name)]);
   
+  onCategoryClick(cat: string) {
+    this.categoryChange.emit(cat);
+  }
 }

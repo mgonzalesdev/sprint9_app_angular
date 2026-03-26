@@ -27,7 +27,6 @@ export class ProductAdminList {
   }
 
   loadProducts() {
-    // this.productService.getProducts().subscribe({
     this.productService.getProductByUser().subscribe({
       next: (data) => {
         this.products.set(data);

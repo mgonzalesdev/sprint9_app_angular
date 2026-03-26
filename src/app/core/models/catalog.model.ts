@@ -24,28 +24,28 @@ export interface Product {
     publicationDate: Date;
     latitude: string;
     longitude: string;
-    image:string;
+    image: string;
     category: Category;
     status: Status;
     condition: Condition;
-    user:User
+    user: User
 }
 
 //Stats data
 export interface CategoryStat {
-  label: string; 
-  value: string | number; 
+    label: string;
+    value: string | number;
 }
 
 // Estructura para el grafico de Barras 
 export interface TrendStat {
-  month: string; // Formato 'YYYY-MM'
-  total: string | number;
+    month: string; // Formato 'YYYY-MM'
+    total: string | number;
 }
 
 // Estructura para los contadores
 export interface SummaryStats {
-  totalProducts: number;
-  activeProducts: number;
-  totalUsers:number
+    totalProducts: number;
+    activeProducts: number;
+    totalUsers: number
 }

@@ -18,12 +18,17 @@ export class Login {
   errorMessage = signal<string | null>(null);
 
   loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-0._%+-]+@[a-zA-Z0-0.-]+\.[a-zA-Z]{2,}$/)]],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
   onSubmit() {
-    if (this.loginForm.invalid) return;
+    this.errorMessage.set(null);
+
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
 
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {

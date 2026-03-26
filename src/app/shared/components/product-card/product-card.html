@@ -20,10 +20,11 @@
                         <span class="material-symbols-outlined text-xs"> {{ product().category.name | categoryIcon
                               }}</span> {{ product().category.name }}
                   </span>
-                  <span class="text-[10px] font-medium text-slate-400">{{product().publicationDate | date:"EEEE, d 'de' MMMM"}}</span>
+                  <span class="text-[10px] font-medium text-slate-600">{{product().publicationDate | date:"EEEE, d 'de'
+                        MMMM"}}</span>
             </div>
             <h3 class="text-base font-bold text-slate-900 dark:text-slate-100">{{ product().name }}</h3>
-            <p class="mt-1 text-sm text-slate-500">Estado: <span class="text-primary font-medium">{{
+            <p class="mt-1 text-sm text-slate-600">Estado: <span class="text-primary font-medium">{{
                         product().condition.name }}</span></p>
             <button [routerLink]="['/product', product().id]"
                   class="mt-4 w-full rounded-lg border border-primary text-primary py-2 text-sm font-bold hover:bg-primary hover:text-white transition-colors">

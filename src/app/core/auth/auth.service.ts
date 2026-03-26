@@ -25,11 +25,11 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         // Guardamos el JWT  
-        const token = response.access_token;
+        const token = response.accessToken;
         if (token) {
           this.saveSession(token, response.user);
         } else {
-          console.error('La API no envió access_token', response);
+          console.error('La API no envió accessToken', response);
         }
       })
     );
@@ -38,13 +38,14 @@ export class AuthService {
   register(userData: any) {
     return this.http.post<any>(`${this.apiUrl}/register`, userData).pipe(
       tap(response => {
-        const token = response.access_token || response.accessToken;
+        const token = response.accessToken;
         if (token) {
           this.saveSession(token, response.user);
         }
       })
     );
   }
+  
   private saveSession(token: string, user: any) {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));

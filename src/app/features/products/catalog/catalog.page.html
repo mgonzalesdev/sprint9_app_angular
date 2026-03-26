@@ -1,5 +1,5 @@
 <div class="flex flex-col md:flex-row w-full h-full">
-  <app-catalog-aside   [currentCategory]="selectedCategory()"
+  <app-catalog-aside [currentCategory]="queryParams()['category'] || 'Todos'"
     (categoryChange)="handleCategoryChange($event)"
     (proximityChange)="handleProximityChange($event)"></app-catalog-aside>
   <section class="flex-1 p-6">

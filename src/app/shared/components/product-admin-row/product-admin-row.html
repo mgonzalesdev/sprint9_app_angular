@@ -8,7 +8,7 @@
         <div class="flex justify-between items-start">
             <div>
                 <h4 class="font-bold text-slate-900 dark:text-white">{{ product().name }}</h4>
-                <p class="text-xs text-slate-500 mt-1">{{ product().description }}</p>
+                <p class="text-xs text-slate-600 mt-1">{{ product().description }}</p>
             </div>
 
             <button
@@ -21,14 +21,14 @@
         </div>
         <div class="flex items-center gap-4 mt-3">
             <button [routerLink]="['/manage/edit', product().id]" 
-                class="flex items-center gap-1 text-[11px] font-bold text-slate-400 hover:text-primary transition-colors">
+                class="flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-primary transition-colors">
                 <span class="material-symbols-outlined text-[16px]">edit</span> EDITAR
             </button>
             <button (click)="onDeleteClick()" 
-                class="flex items-center gap-1 text-[11px] font-bold text-slate-400 hover:text-red-500 transition-colors">
+                class="flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-red-500 transition-colors">
                 <span class="material-symbols-outlined text-[16px]">delete</span> BORRAR
             </button>
-            <span class="text-[10px] text-slate-400 ml-auto">Publicado: {{product().publicationDate | date:"EEEE, d 'de' MMMM"}}</span>
+            <span class="text-[12px] text-slate-600 ml-auto">Publicado: {{product().publicationDate | date:"EEEE, d 'de' MMMM"}}</span>
         </div>
     </div>
 </div>

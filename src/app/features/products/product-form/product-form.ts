@@ -34,8 +34,8 @@ export class ProductForm implements OnInit {
   ecoImpactInfo = signal<string | null>(null);
 
   productForm = this.fb.group({
-    name: ['', [Validators.required]],
-    description: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    description: ['', [Validators.required, Validators.minLength(6)]],
     categoryId: [null, [Validators.required]],
     statusId: [null, [Validators.required]],
     conditionId: [null, [Validators.required]],
@@ -80,6 +80,7 @@ export class ProductForm implements OnInit {
       this.getUserLocation();
     }
   }
+
   onFileSelected(event: any) {
     const file = event.target.files[0] as File;
     if (file) {
@@ -101,13 +102,14 @@ export class ProductForm implements OnInit {
           longitude: position.coords.longitude
         });
       },
-        (error) => console.warn('Geolocalización rechazada o no disponible:', error)
+        //(error) => console.warn('Geolocalización rechazada o no disponible:', error)
+        () => {}
       );
     }
   }
 
   onMapChange(newCoords: { lat: number, lng: number }) {
-    // Cuando el usuario arrastra el marcador, actualizamos el formulario
+    this.coords.set(newCoords);// Al arrastrar el marcador, actualizamos el formulario
     this.productForm.patchValue({
       latitude: newCoords.lat,
       longitude: newCoords.lng
@@ -116,12 +118,13 @@ export class ProductForm implements OnInit {
 
   save() {
     if (this.productForm.invalid) {
-      this.productForm.markAllAsTouched(); // muestra los errores en el HTML
+      this.productForm.markAllAsTouched(); 
       return;
     }
+
     const data = this.productForm.getRawValue();
     const image = this.selectedFile(); //  Signal donde se guardo el archivo del <input type="file">
-    
+
     const request = this.id()
       ? this.productService.update(this.id()!, data)
       : this.productService.create(data, image);
@@ -169,6 +172,7 @@ export class ProductForm implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+
   clearAiData() {
     this.ecoImpactInfo.set(null);
     this.productForm.patchValue({ name: '', description: '' });
